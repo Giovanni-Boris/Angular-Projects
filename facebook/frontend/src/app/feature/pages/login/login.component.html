@@ -7,7 +7,7 @@
       </span>
     </div>
     <div class="loginRight">
-      <form  [formGroup]="loginForm" class="loginBox" (ngSubmit)="onSubmit($event)">
+      <form  [formGroup]="loginForm" class="loginBox">
         <input 
           placeholder="Use boris@gmail.com"
           type="email"
@@ -20,11 +20,11 @@
           class="loginInput"
           formControlName="password"
         />
-        <button class="loginButton" type="submit">
+        <button class="loginButton" type="submit" (click)="onSubmit()">
             Log In
         </button>
         <span class="loginForgot">Forgot Password</span>   
-          <button class="loginRegisterButton">
+          <button [routerLink]="'/register'"  class="loginRegisterButton">
               Create a New Account
           </button>
       </form>

@@ -1,0 +1,41 @@
+<div class="login">
+  <div class="loginWrapper">
+    <div class="loginLeft">
+      <h3 class="loginLogo">borisocial</h3>
+      <span class="loginDesc">
+        Connect with friends and the world around you on borisocial.
+      </span>
+    </div>
+    <form [formGroup]="registerForm" class="loginRight">
+      <div class="loginBox">
+        <input
+          placeholder="Username"
+          class="loginInput"
+          formControlName ="username"
+        />
+        <input
+          placeholder="Email"
+          class="loginInput"
+          type="email"
+          formControlName ="email"
+        />
+        <input
+          placeholder="Password"
+          class="loginInput"
+          type="password"
+          formControlName ="password"
+        />
+        <input
+          placeholder="Password Again"
+          class="loginInput"
+          type="password"
+          formControlName ="passwordAgain"
+        />
+        <button class="loginButton" (click)="onSubmit()">
+          Sign Up
+        </button>
+        <button [routerLink]="'/login'" class="loginRegisterButton">Log into Account</button>
+      </div>
+    </form>
+  </div>
+</div>
