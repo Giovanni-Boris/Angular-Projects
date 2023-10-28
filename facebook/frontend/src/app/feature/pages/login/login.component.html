@@ -1,0 +1,33 @@
+<div class="login">
+  <div class="loginWrapper">
+    <div class="loginLeft">
+      <h3 class="loginLogo">borisocial</h3>
+      <span class="loginDesc">
+        Connect with friends and the world around you on borisocial.
+      </span>
+    </div>
+    <div class="loginRight">
+      <form  [formGroup]="loginForm" class="loginBox" (ngSubmit)="onSubmit($event)">
+        <input 
+          placeholder="Use boris@gmail.com"
+          type="email"
+          class="loginInput"
+          formControlName="email"
+        />
+        <input
+          placeholder="Use  123456"
+          type="password"
+          class="loginInput"
+          formControlName="password"
+        />
+        <button class="loginButton" type="submit">
+            Log In
+        </button>
+        <span class="loginForgot">Forgot Password</span>   
+          <button class="loginRegisterButton">
+              Create a New Account
+          </button>
+      </form>
+    </div>
+  </div>
+</div>
