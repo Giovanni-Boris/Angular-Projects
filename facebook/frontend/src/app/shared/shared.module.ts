@@ -5,6 +5,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FeedComponent } from './feed/feed.component';
 import { RightbarComponent } from './rightbar/rightbar.component';
+import { ShareComponent } from './share/share.component';
+import { PostComponent } from './post/post.component';
 
 
 @NgModule({
@@ -12,7 +14,9 @@ import { RightbarComponent } from './rightbar/rightbar.component';
     TopbarComponent,
     SidebarComponent,
     FeedComponent,
-    RightbarComponent
+    RightbarComponent,
+    ShareComponent,
+    PostComponent
   ],
   imports: [
     CommonModule,
