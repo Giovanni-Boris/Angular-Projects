@@ -1,19 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './pages';
+import { LoginComponent,HomeComponent, RegisterComponent } from './pages';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RegisterComponent } from './pages/register/register.component';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    SharedModule,
     RouterModule
   ]
 })
