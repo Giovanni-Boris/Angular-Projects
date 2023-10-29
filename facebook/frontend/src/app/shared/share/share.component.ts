@@ -8,19 +8,18 @@ import { Component } from '@angular/core';
 export class ShareComponent {
   file: File | null = null;
   desc : String  = "";
-  
-  getObjectURL(file: File): string {
-    return URL.createObjectURL(file);
-  }
+  fileUrl : string =  "";
+
   handleFileInput(event: Event) {
     const target = event.target as HTMLInputElement;
     const files = target.files;
     if (files && files.length > 0) {
       this.file = files[0];
+      this.fileUrl = URL.createObjectURL(this.file)
     }
   }
 
   handleSubmit(){
-
+    console.log(this.file,this.desc);
   }
 }

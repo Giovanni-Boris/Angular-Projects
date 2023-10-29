@@ -7,6 +7,7 @@ import { FeedComponent } from './feed/feed.component';
 import { RightbarComponent } from './rightbar/rightbar.component';
 import { ShareComponent } from './share/share.component';
 import { PostComponent } from './post/post.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { PostComponent } from './post/post.component';
   ],
   imports: [
     CommonModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule
   ],
   exports :[
     TopbarComponent,

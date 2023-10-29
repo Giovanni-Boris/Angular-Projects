@@ -8,14 +8,16 @@
     <input
       placeholder="`What's in your mind "
       class="shareInput"
+      type="text"
+      [(ngModel)] = "desc"
     />
   </div>
   <hr class="shareHr" />
     <div class="shareImgContainer" *ngIf="file">
-      <img class="shareImg" [src]="getObjectURL(file)" alt="" />
+      <img class="shareImg" [src]="fileUrl" alt="" />
       <mat-icon 
         class="shareCancelImg" 
-        (click)="file = null"
+        (click)="file = null; fileUrl ='' "
       >cancel</mat-icon>
 
     </div>
