@@ -8,6 +8,8 @@ import { RightbarComponent } from './rightbar/rightbar.component';
 import { ShareComponent } from './share/share.component';
 import { PostComponent } from './post/post.component';
 import { FormsModule } from '@angular/forms';
+import { HomeRightbarComponent } from './home-rightbar/home-rightbar.component';
+import { ProfileRightbarComponent } from './profile-rightbar/profile-rightbar.component';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { FormsModule } from '@angular/forms';
     FeedComponent,
     RightbarComponent,
     ShareComponent,
-    PostComponent
+    PostComponent,
+    HomeRightbarComponent,
+    ProfileRightbarComponent
   ],
   imports: [
     CommonModule,
