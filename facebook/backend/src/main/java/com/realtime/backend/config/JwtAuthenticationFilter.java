@@ -20,13 +20,14 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
     @Override
     protected void doFilterInternal(
             @NonNull HttpServletRequest request,
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
+        System.out.println("Callllllllllllllllllllllllllll");
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
         final String userEmail;
@@ -34,6 +35,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
+        System.out.println("validando token");
         jwt = authHeader.substring(7);
         userEmail =  jwtService.extractUsername(jwt);// todo extract the userEmail from jwt token
         if(userEmail!=null && SecurityContextHolder.getContext().getAuthentication()==null){

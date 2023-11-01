@@ -35,7 +35,8 @@ public class User implements UserDetails {
     private String description;
     private String country;
     private Integer relationship;
-
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Post> posts;
     @Enumerated(EnumType.STRING)
     private Role role;
 
