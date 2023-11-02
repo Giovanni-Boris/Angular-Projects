@@ -10,8 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Data
 @Builder
@@ -28,15 +27,17 @@ public class User implements UserDetails {
     private String password;
     private String profilePicture;
     private String coverPicture;
-    @OneToMany
-    private List<User> followers;
-    @OneToMany
-    private List<User> followings;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User owner;
+    @OneToMany(mappedBy = "owner")
+    private Set<User> followers;
+    @OneToMany(mappedBy = "owner")
+    private Set<User> followings;
     private String description;
     private String country;
     private Integer relationship;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Post> posts;
+    private Set<Post> posts;
     @Enumerated(EnumType.STRING)
     private Role role;
 

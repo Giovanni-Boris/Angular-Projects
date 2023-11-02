@@ -13,6 +13,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
@@ -24,15 +26,20 @@ public class AuthenticationService {
     var user = User.builder()
       .name(request.getName())
       .email(request.getEmail())
+      .followings(new HashSet<>())
+      .followers(new HashSet<>())
+      .posts(new HashSet<>())
+      .description("")
+      .coverPicture("")
+      .profilePicture("")
+      .relationship(1)
+      .country("")
       .password(passwordEncoder.encode(request.getPassword()))
       .role(Role.USER)
       .build();
     repository.save(user);
     var jwtToken = jwtService.generateToken(user);
-    return AuthenticationResponse.builder()
-      .token(jwtToken)
-      .user(user)
-      .build();
+    return this.responseBuilder(user,jwtToken);
   }
   public AuthenticationResponse authenticate(AuthenticationRequest request){
     authenticationManager.authenticate(
@@ -44,9 +51,21 @@ public class AuthenticationService {
     var user = repository.findByEmail(request.getEmail())
       .orElseThrow();
     var jwtToken = jwtService.generateToken(user);
+    return this.responseBuilder(user,jwtToken);
+  }
+  private AuthenticationResponse responseBuilder(User user, String token){
     return AuthenticationResponse.builder()
-      .token(jwtToken)
-      .user(user)
+      .token(token)
+      .id(user.getId())
+      .email(user.getEmail())
+      .name(user.getName())
+      .profilePicture(user.getProfilePicture())
+      .coverPicture(user.getCoverPicture())
+      .description(user.getDescription())
+      .country(user.getCountry())
+      .relationship(user.getRelationship())
+      .followers(user.getFollowers())
+      .followings(user.getFollowings())
       .build();
   }
 }
