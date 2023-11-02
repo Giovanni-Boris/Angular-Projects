@@ -1,9 +1,13 @@
 package com.realtime.backend.service;
 
+import com.realtime.backend.controller.exception.AlreadyFollowingException;
 import com.realtime.backend.controller.user.UserRequest;
 import com.realtime.backend.controller.user.UserGetResponse;
+import com.realtime.backend.model.Follower;
+import com.realtime.backend.model.Following;
 import com.realtime.backend.model.User;
 import com.realtime.backend.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -48,19 +52,31 @@ public class UserService {
       .description(user.get().getDescription())
       .country(user.get().getCountry())
       .relationship(user.get().getRelationship())
+      .followings(user.get().getFollowings())
+      .followers(user.get().getFollowers())
+      .posts(user.get().getPosts())
       .build();
   }
-  public void followUser(Integer userId, Integer followUserId) {
-    User user = repository.findById(userId).orElseThrow(() -> new NoSuchElementException("the user with ID " + userId + " is not found "));
-    User userToFollow = repository.findById(followUserId).orElseThrow(() -> new NoSuchElementException("El usuario a seguir con ID " + followUserId + " no se encontró"));
+  @Transactional
+  public String followUser(Integer userId, Integer followUserId) {
+    var user = repository.findById(userId).orElseThrow(() -> new NoSuchElementException("the user with ID " + userId + " is not found "));
+    var userToFollow = repository.findById(followUserId).orElseThrow(() -> new NoSuchElementException("the user to follow with ID " + followUserId + " is not found "));
+    var follower = Follower
+      .builder()
+      .to(user)
+      .userId(userToFollow.getId())
+      .build();
+    var following = Following
+      .builder()
+      .from(userToFollow)
+      .userId(user.getId())
+      .build();
 
-    user.getFollowers().add(userToFollow);
-
-    // Agregar user a la lista de followings de userToFollow
-    userToFollow.getFollowings().add(user);
-
-    // Guardar los cambios en la base de datos
-    //userRepository.save(user);
-    //userRepository.save(userToFollow);
+    if(user.getFollowers().contains(follower)) throw new AlreadyFollowingException("you allready follow this user");
+    user.addFollower(follower);
+    userToFollow.addFollowing(following);
+    repository.save(user);
+    repository.save(userToFollow);
+    return "user has been followed";
   }
 }

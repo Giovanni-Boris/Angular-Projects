@@ -13,6 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 @Service
@@ -26,9 +27,9 @@ public class AuthenticationService {
     var user = User.builder()
       .name(request.getName())
       .email(request.getEmail())
-      .followings(new HashSet<>())
-      .followers(new HashSet<>())
-      .posts(new HashSet<>())
+      .followings(new ArrayList<>())
+      .followers( new ArrayList<>())
+      .posts(null)
       .description("")
       .coverPicture("")
       .profilePicture("")

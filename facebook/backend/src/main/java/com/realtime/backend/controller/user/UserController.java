@@ -32,11 +32,10 @@ public class UserController {
   ){
     return ResponseEntity.ok(userService.getUser(userId, name));
   }
-  @PutMapping("/follow/{id}")
-  public ResponseEntity<Object> followUser(@PathVariable Integer id, @RequestBody FollowRequest followRequest) {
-    if (id.equals(followRequest.getFollowUserId()))  throw new UnauthorizedAccessException("you cant follow yourself");
-      //return ResponseEntity.ok(userService.followUser(id, followRequest.getFollowUserId()));
-    return ResponseEntity.ok("Usuario seguido con éxito");
+  @PutMapping("/{id}/follow")
+  public ResponseEntity<Object> followUser(@PathVariable Integer id, @RequestBody FollowRequest user) {
+    if (id.equals(user.getUserId()))  throw new UnauthorizedAccessException("you cant follow yourself");
+    return ResponseEntity.ok(userService.followUser(user.getUserId(),id));
   }
 
 }

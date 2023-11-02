@@ -1,5 +1,6 @@
 package com.realtime.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.realtime.backend.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -27,20 +28,26 @@ public class User implements UserDetails {
     private String password;
     private String profilePicture;
     private String coverPicture;
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User owner;
-    @OneToMany(mappedBy = "owner")
-    private Set<User> followers;
-    @OneToMany(mappedBy = "owner")
-    private Set<User> followings;
+    @OneToMany(mappedBy = "to", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<Follower> followers;
+    @OneToMany(mappedBy = "from", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<Following> followings;
     private String description;
     private String country;
     private Integer relationship;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Post> posts;
+    @JsonManagedReference
+    private List<Post> posts;
     @Enumerated(EnumType.STRING)
     private Role role;
-
+    public void addFollower(Follower toFollow ) {
+        this.followers.add(toFollow);
+    }
+    public void addFollowing( Following toFollowing) {
+        this.followings.add(toFollowing);
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

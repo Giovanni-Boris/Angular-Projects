@@ -29,6 +29,7 @@ public class ControllerExceptionHandler {
 
   @ExceptionHandler(Exception.class)
   public ResponseEntity<ErrorDetails> globalExceptionHandling(Exception exception, WebRequest request) {
+    exception.printStackTrace();
     return new ResponseEntity<>(new ErrorDetails(new Date(), exception.getMessage(), request.getDescription(false)), HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
