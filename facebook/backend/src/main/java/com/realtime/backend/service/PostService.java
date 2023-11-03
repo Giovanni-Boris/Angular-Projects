@@ -42,7 +42,8 @@ public class PostService {
     return "the post has been deleted";
   }
   public String likePost(Integer id, Integer userId) {
-    var post = postRepository.findById(id).orElseThrow();
+    var post = postRepository.findById(id)
+      .orElseThrow(()-> new NoSuchElementException("Post not found"));
     PostLike like = PostLike.builder()
       .user_like(post)
       .userId(userId)
@@ -53,9 +54,13 @@ public class PostService {
     }
     post.removeLike(like);
     return "he post has been disliked";
-
   }
-  
+  //get post
+  public Post getPost(Integer id){
+    return postRepository.findById(id)
+      .orElseThrow(()-> new NoSuchElementException("Post not found"));
+  }
+
 
   private PostResponse generateResponge(Post post, User user) {
     return PostResponse.builder()
