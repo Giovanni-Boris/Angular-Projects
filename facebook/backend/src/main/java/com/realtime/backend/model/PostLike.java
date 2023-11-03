@@ -28,7 +28,8 @@ public class PostLike {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    Follower otherUser = (Follower) o;
-    return this.userId.equals(otherUser.getUserId());
+    PostLike otherUser = (PostLike) o;
+    System.out.println(this.userId+"  userid  "+   this.getUser_like().getId() +"    post "+ this.getUser_like().getId() +"   "+ otherUser.getUser_like().getId());
+    return this.userId.equals(otherUser.getUserId()) && this.getUser_like().getId().equals(otherUser.getUser_like().getId());
   }
 }

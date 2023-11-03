@@ -12,7 +12,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class PostService {
@@ -49,16 +52,38 @@ public class PostService {
       .userId(userId)
       .build();
     if(post.getLikes().contains(like)){
-      post.addLike(like);
-      return "he post has been liked";
+      post.removeLike(like);
+      postRepository.save(post);
+      return "he post has been disliked";
     }
-    post.removeLike(like);
-    return "he post has been disliked";
+    post.addLike(like);
+    postRepository.save(post);
+    return "he post has been liked";
   }
   //get post
   public Post getPost(Integer id){
     return postRepository.findById(id)
       .orElseThrow(()-> new NoSuchElementException("Post not found"));
+  }
+
+  public List<Post> getAllPosts(String name){
+    var user = userRepository.findByName(name)
+      .orElseThrow(()-> new NoSuchElementException("User not found"));
+    return user.getPosts();
+  }
+
+  //get a timelime posts
+  public List<Post> getTimelinePosts(Integer userId){
+    var currentUser = userRepository.findById(userId)
+      .orElseThrow(()-> new NoSuchElementException("User not found"));
+    var userPosts = currentUser.getPosts();
+    List<Post> friendPosts = currentUser.getFollowers()
+      .stream()
+      .flatMap(follower -> postRepository.findByUser_Id(follower.getUserId()).stream())
+      .toList();
+    userPosts.addAll(friendPosts);
+    return userPosts;
+
   }
 
 

@@ -57,7 +57,7 @@ public class User implements UserDetails {
     }
     //Posts
     public void addPost(Post post){
-        this.addPost(post);
+        this.posts.add(post);
     }
     //Component for JWT
     @Override
