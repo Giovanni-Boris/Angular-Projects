@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class PostUserId {
+public class PostLike {
   @Id
   @GeneratedValue(strategy= GenerationType.AUTO)
   @JsonIgnore

@@ -26,13 +26,20 @@ public class Post {
   private String img;
   @OneToMany(mappedBy = "user_like", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
   @JsonManagedReference
-  private List<PostUserId> likes;
+  private List<PostLike> likes;
   @ManyToOne
   @JoinColumn(name = "user_id")
   @JsonBackReference
   private User user;
   @CreationTimestamp
-  private Date regdate;
+  private Date creationdate;
   @UpdateTimestamp
   private Date updatedate;
+
+  public void addLike(PostLike userlike){
+    this.likes.add(userlike);
+  }
+  public void removeLike(PostLike userlike){
+    this.likes.remove(userlike);
+  }
 }

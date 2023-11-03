@@ -17,5 +17,10 @@ public class PostController {
   public ResponseEntity<Object> createPost(@RequestBody PostRequest postRequest) {
     return ResponseEntity.ok(postService.createPost(postRequest));
   }
-  
+  //like a post
+  @PutMapping("/:id/like")
+  public ResponseEntity<Object> likePost(@PathVariable Integer id, @RequestBody PostRequest postRequest) {
+    return ResponseEntity.ok(postService.likePost(id, postRequest.getUserId()));
+  }
+
 }
