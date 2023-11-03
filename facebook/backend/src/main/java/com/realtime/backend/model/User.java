@@ -28,16 +28,16 @@ public class User implements UserDetails {
     private String password;
     private String profilePicture;
     private String coverPicture;
-    @OneToMany(mappedBy = "to", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "to", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonManagedReference
     private List<Follower> followers;
-    @OneToMany(mappedBy = "from", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "from", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonManagedReference
     private List<Following> followings;
     private String description;
     private String country;
     private Integer relationship;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
     @JsonManagedReference
     private List<Post> posts;
     @Enumerated(EnumType.STRING)
@@ -48,7 +48,12 @@ public class User implements UserDetails {
     public void addFollowing( Following toFollowing) {
         this.followings.add(toFollowing);
     }
-
+    public void removeFollower(Follower follower) {
+      this.followers.remove(follower);
+    }
+    public void removeFollowing(Following following) {
+      this.followings.remove(following);
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
@@ -83,4 +88,7 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
+
 }

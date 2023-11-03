@@ -27,17 +27,13 @@ public class Follower {
   @JsonBackReference
   private User to;
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(this.userId);
-  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Follower otherUser = (Follower) o;
-
-    return this.getUserId().equals(otherUser.getUserId());
+    return this.getUserId().equals(otherUser.getUserId()) && this.getTo().getId().equals(otherUser.getTo().getId());
   }
 
 }

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
@@ -25,6 +26,10 @@ public class UserController {
     if (!id.equals(deleteUser.getUserId())) throw new UnauthorizedAccessException("User can be deleted but other.");
     return ResponseEntity.ok(userService.deleteUser(deleteUser.getUserId()));
   }
+  @GetMapping("/friends/{userId}")
+  public ResponseEntity<List<FriendsResponse>> getFriends(@PathVariable Integer userId) {
+    return ResponseEntity.ok(userService.getFriends(userId));
+  }
   @GetMapping
   public ResponseEntity<Object> getUser(
     @RequestParam(required = false) Integer userId,
@@ -34,8 +39,14 @@ public class UserController {
   }
   @PutMapping("/{id}/follow")
   public ResponseEntity<Object> followUser(@PathVariable Integer id, @RequestBody FollowRequest user) {
-    if (id.equals(user.getUserId()))  throw new UnauthorizedAccessException("you cant follow yourself");
+    if (id.equals(user.getUserId()))  throw new UnauthorizedAccessException("you can't follow yourself");
     return ResponseEntity.ok(userService.followUser(user.getUserId(),id));
+  }
+
+  @PutMapping("/{id}/unfollow")
+  public ResponseEntity<Object> unfollowUser(@PathVariable Integer id, @RequestBody FollowRequest user) {
+    if (id.equals(user.getUserId()))  throw new UnauthorizedAccessException("you can't unfollow yourself");
+    return ResponseEntity.ok(userService.unfollowUser(user.getUserId(),id));
   }
 
 }

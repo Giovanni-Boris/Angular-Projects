@@ -21,8 +21,18 @@ public class Following {
   @JsonIgnore
   private Integer id;
   private Integer userId;
+  @JsonIgnore
+  private Boolean deleted;
   @ManyToOne
   @JoinColumn(name="to_user_fk")
   @JsonBackReference
   private User from;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Following otherUser = (Following) o;
+    return this.getUserId().equals(otherUser.getUserId()) && this.getFrom().getId().equals(otherUser.getFrom().getId());
+  }
 }
