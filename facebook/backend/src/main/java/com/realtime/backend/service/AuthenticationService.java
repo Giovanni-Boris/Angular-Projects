@@ -29,7 +29,7 @@ public class AuthenticationService {
       .email(request.getEmail())
       .followings(new ArrayList<>())
       .followers( new ArrayList<>())
-      .posts(null)
+      .posts(new ArrayList<>())
       .description("")
       .coverPicture("")
       .profilePicture("")

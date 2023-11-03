@@ -5,16 +5,13 @@ import com.realtime.backend.controller.exception.NotFollowerException;
 import com.realtime.backend.controller.user.FriendsResponse;
 import com.realtime.backend.controller.user.UserRequest;
 import com.realtime.backend.controller.user.UserGetResponse;
-import com.realtime.backend.model.Follower;
-import com.realtime.backend.model.Following;
-import com.realtime.backend.model.User;
+import com.realtime.backend.model.*;
 import com.realtime.backend.repository.FollowerRepository;
 import com.realtime.backend.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -24,7 +21,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserService {
   private final UserRepository userRepository;
-  private final FollowerRepository followerRepository;
   private final PasswordEncoder passwordEncoder;
   public String updateUser(UserRequest updatedUser) {
     Optional<User> currentUser =  userRepository.findById(updatedUser.getUserId());
@@ -128,4 +124,6 @@ public class UserService {
       })
       .collect(Collectors.toList());
   }
+
+
 }

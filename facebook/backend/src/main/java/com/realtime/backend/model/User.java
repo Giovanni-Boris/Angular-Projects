@@ -28,20 +28,21 @@ public class User implements UserDetails {
     private String password;
     private String profilePicture;
     private String coverPicture;
+    private String description;
+    private String country;
+    private Integer relationship;
+    @Enumerated(EnumType.STRING)
+    private Role role;
     @OneToMany(mappedBy = "to", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonManagedReference
     private List<Follower> followers;
     @OneToMany(mappedBy = "from", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonManagedReference
     private List<Following> followings;
-    private String description;
-    private String country;
-    private Integer relationship;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
     @JsonManagedReference
     private List<Post> posts;
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    //Followers
     public void addFollower(Follower toFollow ) {
         this.followers.add(toFollow);
     }
@@ -54,6 +55,11 @@ public class User implements UserDetails {
     public void removeFollowing(Following following) {
       this.followings.remove(following);
     }
+    //Posts
+    public void addPost(Post post){
+        this.addPost(post);
+    }
+    //Component for JWT
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
