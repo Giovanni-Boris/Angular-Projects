@@ -57,16 +57,6 @@ public class AuthenticationService {
   private AuthenticationResponse responseBuilder(User user, String token){
     return AuthenticationResponse.builder()
       .token(token)
-      .id(user.getId())
-      .email(user.getEmail())
-      .name(user.getName())
-      .profilePicture(user.getProfilePicture())
-      .coverPicture(user.getCoverPicture())
-      .description(user.getDescription())
-      .country(user.getCountry())
-      .relationship(user.getRelationship())
-      .followers(user.getFollowers())
-      .followings(user.getFollowings())
       .build();
   }
 }

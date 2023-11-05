@@ -16,14 +16,4 @@ import java.util.Set;
 @NoArgsConstructor
 public class AuthenticationResponse {
   private String token;
-  private Integer id;
-  private String name;
-  private String email;
-  private String profilePicture;
-  private String coverPicture;
-  private String description;
-  private String country;
-  private Integer relationship;
-  private List<Follower> followers;
-  private List<Following> followings;
 }
