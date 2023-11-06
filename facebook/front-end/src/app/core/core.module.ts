@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { TopbarComponent } from './components/topbar/topbar.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    TopbarComponent
+  ],
   imports: [
-    CommonModule,
-    
-  ]
+    MatIconModule
+  ],
+  exports:[TopbarComponent]
 })
 export class CoreModule { }

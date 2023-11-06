@@ -26,7 +26,6 @@ export namespace AuthGuard {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ) =>{ 
-        console.log("Activeitd from children");
         return canActivate(route, state)
     };
 }

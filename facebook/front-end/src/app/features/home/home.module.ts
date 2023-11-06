@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { HomeRoutingModule } from './home.routing';
+import { CoreModule } from 'src/app/core/core.module';
 
 
 
@@ -13,7 +14,8 @@ import { HomeRoutingModule } from './home.routing';
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    CoreModule
   ]
 })
 export class HomeModule { }
