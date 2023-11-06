@@ -16,4 +16,5 @@ import java.util.Set;
 @NoArgsConstructor
 public class AuthenticationResponse {
   private String token;
+  private Integer id;
 }

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { login } from 'src/app/store/user/user.actions';
+import { getUserData, login } from 'src/app/store/user/user.actions';
 import { selectToken } from 'src/app/store/user/user.selectors';
 import { Subject, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
@@ -24,7 +24,10 @@ export class LoginComponent implements OnDestroy, OnInit {
     this.store.select(selectToken)
       .pipe(takeUntil(this.ngDestroyed$))
       .subscribe((val)=>{
-        if(val) this.router.navigate(["/"]);
+        if(val) {
+          this.store.dispatch(getUserData({ id: val.id}));
+          this.router.navigate(["/"])
+        };
       })
   }
   

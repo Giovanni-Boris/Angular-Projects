@@ -57,6 +57,7 @@ public class AuthenticationService {
   private AuthenticationResponse responseBuilder(User user, String token){
     return AuthenticationResponse.builder()
       .token(token)
+      .id(user.getId())
       .build();
   }
 }
