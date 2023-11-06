@@ -3,12 +3,14 @@ import { login, loginSuccess, loginFailure } from './user.actions';
 import { User } from 'src/app/models/user.model';
 
 export interface AuthState {
+  token: string | null,
   user: User | null,
   isFetching: boolean,
   error: string | null,
 }
 
 export const initialState : AuthState = {
+  token: null,
   user: null,
   isFetching: false,
   error: null,
@@ -17,14 +19,12 @@ export const initialState : AuthState = {
 export const authReducer = createReducer(
   initialState,
   on(login, (state) => ({ ...state, isLoading: true })),
-  on(loginSuccess, (state, { user }) => ({
-    user,
-    isFetching: false,
-    error: null
+  on(loginSuccess, (state, { token }) => ({
+    ...state,
+    token
   })),
   on(loginFailure, (state, { error }) => ({
-    user:null,
-    isFetching: false,
+    ...state,
     error
   }) )
 );
