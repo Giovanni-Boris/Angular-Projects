@@ -2,15 +2,15 @@
   <ul class="sidebarList" >
     <li class="sidebarListItem" *ngFor="let item of iconNames">
       <mat-icon class="sidebarIcon">{{item.icon}}</mat-icon>
-      <span className="sidebarListItemText">{{item.name}}</span>
+      <span class="sidebarListItemText">{{item.name}}</span>
     </li>
   </ul>
   <button class="sidebarButton">Show More</button>
   <hr class="sidebarHr" />
   <ul class="sidebarFriendList">
-     <li className="sidebarFriend">
-      <img className="sidebarFriendImg" src="" alt="" />
-      <span className="sidebarFriendName">user.username</span>
+     <li class="sidebarFriend"  *ngFor="let user of users">
+      <img class="sidebarFriendImg" [src]="'assets/'+user.profilePicture" alt="" />
+      <span class="sidebarFriendName">{{user.username}}</span>
     </li>
   </ul>
 </div>

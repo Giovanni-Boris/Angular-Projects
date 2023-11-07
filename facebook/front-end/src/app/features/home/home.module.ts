@@ -9,6 +9,10 @@ import { FeedComponent } from './components/feed/feed.component';
 import { RightbarComponent } from './components/rightbar/rightbar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { HomeRightbarComponent } from './components/home-rightbar/home-rightbar.component';
+import { CloseFriendComponent } from './components/close-friend/close-friend.component';
+import { PostComponent } from './components/post/post.component';
+import { ShareComponent } from './components/share/share.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -18,13 +22,17 @@ import { HomeRightbarComponent } from './components/home-rightbar/home-rightbar.
     SidebarComponent,
     FeedComponent,
     RightbarComponent,
-    HomeRightbarComponent
+    HomeRightbarComponent,
+    CloseFriendComponent,
+    PostComponent,
+    ShareComponent
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
     CoreModule,
     MatIconModule,
+    FormsModule
 
   ]
 })

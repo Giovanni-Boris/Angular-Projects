@@ -1,5 +1,5 @@
+import { Users } from 'src/data/dummyData';
 import { Component } from '@angular/core';
-
 const iconNames = [
   { icon: 'rss_feed', name: 'Feed' },
   { icon: 'chat', name: 'Chats' },
@@ -19,4 +19,5 @@ const iconNames = [
 })
 export class SidebarComponent {
   public iconNames = iconNames;
+  public users = Users;
 }
