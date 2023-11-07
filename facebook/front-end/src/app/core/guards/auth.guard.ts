@@ -17,6 +17,7 @@ export namespace AuthGuard {
         console.log("Consultadno los guarfds")
         return store.select(selectIsAuth).pipe(
             map((isAuth) => {
+                console.log(isAuth);
                 return isAuth ? true : router.parseUrl("/auth/login");
               })
         );

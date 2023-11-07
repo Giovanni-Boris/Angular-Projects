@@ -1,0 +1,21 @@
+<div class="birthdayContainer">
+  <img class="birthdayImg" src="/assets/heart.png" alt="" />
+  <span class="birthdayText">
+    <b>Pola Foster</b> and <b>3 other friends</b> have a birthday today.
+  </span>
+</div>
+<img class="rightbarAd" src="/assets/ad.png" alt="" />
+<h4 class="rightbarTitle">Online Friends</h4>
+<ul class="rightbarFriendList">
+  <li class="rightbarFriend" *ngFor="let user of users">
+    <div class="rightbarProfileImgContainer">
+      <img
+        class="rightbarProfileImg"
+        [src]="'assets/'+ user.profilePicture"
+        alt=""
+      />
+      <span class="rightbarOnline"></span>
+    </div>
+    <span class="rightbarUsername">{{user.username}}</span>
+  </li>
+</ul>

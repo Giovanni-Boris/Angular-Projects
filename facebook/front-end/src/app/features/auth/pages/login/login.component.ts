@@ -21,6 +21,8 @@ export class LoginComponent implements OnDestroy, OnInit {
     });
   }
   ngOnInit(): void {
+    console.log("creating");
+
     this.store.select(selectToken)
       .pipe(takeUntil(this.ngDestroyed$))
       .subscribe((val)=>{
