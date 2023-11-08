@@ -10,8 +10,11 @@ import { selectUserData } from 'src/app/store/user/user.selectors';
   styleUrls: ['./share.component.css']
 })
 export class ShareComponent implements OnInit,OnDestroy {
-  public ngDestroyed$ = new Subject();
-  public userData: User | null = null;
+  ngDestroyed$ = new Subject();
+  userData: User | null = null;
+  file: File | null = null;
+  desc : String  = "";
+  fileUrl : string =  "";
   public constructor(private store: Store){}
 
 
@@ -22,9 +25,7 @@ export class ShareComponent implements OnInit,OnDestroy {
         this.userData = user;
       })
   }
-  file: File | null = null;
-  desc : String  = "";
-  fileUrl : string =  "";
+
 
   handleFileInput(event: Event) {
     const target = event.target as HTMLInputElement;
@@ -41,6 +42,7 @@ export class ShareComponent implements OnInit,OnDestroy {
   }
 
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    this.ngDestroyed$.next("Complete");
+    this.ngDestroyed$.complete();
   }
 }

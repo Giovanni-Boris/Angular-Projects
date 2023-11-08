@@ -12,9 +12,10 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  getUser( id: number) : Observable<User> {
+  getUser( id: number = -1, name: string = "") : Observable<User> {
+    let api = "user?" + (id==-1 ? `name=${name}` : `userId=${id}`);
     return this.http
-      .get<User>( Global.API_URL+`user?userId=${id}`, {})
+      .get<User>( Global.API_URL+api, {})
       .pipe(
         tap(data=>console.log("User  ", data)),
         catchError(this.handleError)

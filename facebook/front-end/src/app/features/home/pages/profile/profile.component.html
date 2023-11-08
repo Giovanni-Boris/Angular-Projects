@@ -1,1 +1,28 @@
-<p>profile works!</p>
+<app-topbar class="topbar"></app-topbar>
+<div class="profile">
+  <app-sidebar class="sidebar"></app-sidebar>
+  <div class="profileRight">
+    <div class="profileRightTop">
+      <div class="profileCover">
+        <img
+          class="profileCoverImg"
+          [src]= "(user && user.coverPicture) ? user.coverPicture : 'assets/person/noCover.png'"
+          alt=""
+        />
+        <img
+          class="profileUserImg"
+          [src]="(user &&  user.profilePicture) ? user.profilePicture : 'assets/person/noAvatar.png'"
+          alt=""
+        />
+      </div>
+      <div class="profileInfo">
+        <h4 class="profileInfoName">{{user?.name}}</h4>
+        <span class="profileInfoDesc">{{user?.description}}</span>
+      </div>
+    </div>
+    <div class="profileRightBottom">
+      <app-feed class="feed"></app-feed>
+      <app-rightbar class="rightbar"></app-rightbar>
+    </div>
+  </div>
+</div>
