@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-rightbar',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./rightbar.component.css']
 })
 export class RightbarComponent {
-
+    @Input()
+    user: User |null = null;
+    
 }

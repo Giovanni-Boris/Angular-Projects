@@ -11,7 +11,6 @@ import { selectToken } from 'src/app/store/user/user.selectors';
 export class TokenInterceptor implements HttpInterceptor {
   constructor(private store: Store) {}
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    console.log("Intercepting");
     this.store.select(selectToken).subscribe((token) => {
       if (token) {
         req = req.clone({

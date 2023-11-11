@@ -19,3 +19,7 @@ export const selectUserData = createSelector(
   authFeature,
   (state) => state.user
 );
+export const selectUserName = createSelector(
+  authFeature,
+  (state) => state.user?.name,
+);

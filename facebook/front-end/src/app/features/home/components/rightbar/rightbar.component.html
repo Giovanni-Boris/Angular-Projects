@@ -1,5 +1,10 @@
 <div class="rightbar">
   <div class="rightbarWrapper">
-    <app-home-rightbar></app-home-rightbar>
+    <ng-container *ngIf="user; else homeRightbar">
+      <app-profile-rightbar [user]="user"/>
+    </ng-container>
+    <ng-template #homeRightbar>
+      <app-home-rightbar/>
+    </ng-template>
   </div>
 </div>

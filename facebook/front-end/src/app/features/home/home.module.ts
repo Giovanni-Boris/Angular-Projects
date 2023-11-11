@@ -13,6 +13,7 @@ import { CloseFriendComponent } from './components/close-friend/close-friend.com
 import { PostComponent } from './components/post/post.component';
 import { ShareComponent } from './components/share/share.component';
 import { FormsModule } from '@angular/forms';
+import { ProfileRightbarComponent } from './components/profile-rightbar/profile-rightbar.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { FormsModule } from '@angular/forms';
     HomeRightbarComponent,
     CloseFriendComponent,
     PostComponent,
-    ShareComponent
+    ShareComponent,
+    ProfileRightbarComponent
   ],
   imports: [
     CommonModule,

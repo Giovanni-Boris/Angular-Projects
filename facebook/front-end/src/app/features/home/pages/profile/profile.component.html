@@ -21,8 +21,8 @@
       </div>
     </div>
     <div class="profileRightBottom">
-      <app-feed class="feed"></app-feed>
-      <app-rightbar class="rightbar"></app-rightbar>
+      <app-feed [name]="user?.name" class="feed"></app-feed>
+      <app-rightbar [user]="user" class="rightbar"></app-rightbar>
     </div>
   </div>
 </div>

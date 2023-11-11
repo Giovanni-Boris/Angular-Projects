@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
@@ -28,6 +29,7 @@ public class PostService {
     var post = Post.builder()
       .likes(new ArrayList<>())
       .img(postRequest.getImg())
+      .creationdate(new Date())
       .description(postRequest.getDescription())
       .user(user)
       .build();

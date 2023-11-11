@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, map, switchMap, takeUntil } from 'rxjs';
 import { UserService } from 'src/app/core/services/user.service';
@@ -11,7 +11,6 @@ import { User } from 'src/app/models/user.model';
 })
 export class ProfileComponent implements OnInit, OnDestroy{
   ngDestroy$ : Subject<boolean>  = new Subject();
-  username: String | null = null;
   user : User | null  = null;
 
   constructor(private activatedRoute: ActivatedRoute, private userService: UserService) {}
@@ -24,6 +23,7 @@ export class ProfileComponent implements OnInit, OnDestroy{
       .subscribe((user)=>{
         this.user = user;
       })
+      
   }
   
   ngOnDestroy(): void {
