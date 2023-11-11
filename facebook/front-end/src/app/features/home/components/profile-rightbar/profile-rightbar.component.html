@@ -1,1 +1,40 @@
-<p>profile-rightbar works!</p>
+<ng-container *ngIf="user?.name !== currentUser?.name">
+  <button class="rightbarFollowButton" (click)="handleClick()">
+    {{ followed ? 'Unfollow' : 'Follow' }}
+    {{ followed ? '-' : '+' }}
+  </button>
+</ng-container>
+
+<h4 class="rightbarTitle">User Information</h4>
+<div class="rightbarInfo">
+  <div class="rightbarInfoItem">
+    <span class="rightbarInfoKey">City</span>
+    <span class="rightbarInfoValue">Australia</span>
+  </div>
+  <div class="rightbarInfoItem">
+    <span class="rightbarInfoKey">From</span>
+    <span class="rightbarInfoValue">{{ user?.country }}</span>
+  </div>
+  <div class="rightbarInfoItem">
+    <span class="rightbarInfoKey">Relationship</span>
+    <span class="rightbarInfoValue">
+      {{ user?.relationship === 1 ? 'Single' : user?.relationship === 2 ? 'Married' : '-' }}
+    </span>
+  </div>
+</div>
+
+<h4 class="rightbarTitle">User Friends</h4>
+<div class="rightbarFollowings">
+  <ng-container *ngFor="let friend of friends">
+    <a [routerLink]="'/profile/' + friend.name">
+      <div class="rightbarFollowing">
+        <img
+          class="rightbarFollowingImg"
+          [src]="friend.profilePicture ? friend.profilePicture : 'assets/person/noAvatar.png'"
+          alt=""
+        />
+        <span class="rightbarFollowingName">{{ friend.name }}</span>
+      </div>
+    </a>
+  </ng-container>
+</div>

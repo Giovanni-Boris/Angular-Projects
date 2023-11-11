@@ -4,6 +4,7 @@ import { Observable, catchError, tap, throwError } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { Global } from 'src/global';
 import { Post } from 'src/app/models/post.model';
+import { Friend } from 'src/app/models/friend.models';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,7 @@ export class UserService {
     ;
   }
   getTimelinePosts( userId:number= -1) : Observable<Post[]> {
-    if(userId===-1) throwError(()=>"Cannot be negative");
+    if(userId===-1) return throwError(()=>"Cannot be negative");
     return this.http
       .get<Post[]>( Global.API_URL+`post/timeline/${userId}`, {})
       .pipe(
@@ -34,11 +35,21 @@ export class UserService {
     ;
   }
   getProfilePosts( name:string = "") : Observable<Post[]> {
-    if(name==="") throwError(()=>"Cannot be negative");
+    if(name==="") return throwError(()=>"Cannot be negative");
     return this.http
       .get<Post[]>( Global.API_URL+`post/profile/${name}`, {})
       .pipe(
         tap(data=>console.log("Posts  ", data)),
+        catchError(this.handleError)
+      )
+    ;
+  }
+  getFriends( id: number = -1) : Observable<Friend[]> {
+    if(id===-1) throwError(()=>"Cannot be negative");
+    return this.http
+      .get<Friend[]>( Global.API_URL+`user/friends/${id}`, {})
+      .pipe(
+        tap(data=>console.log("friends", data)),
         catchError(this.handleError)
       )
     ;

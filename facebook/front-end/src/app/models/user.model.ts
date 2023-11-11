@@ -1,3 +1,5 @@
+import { Friend } from './friend.models';
+
 export interface User {
   userId: number;
   name: string;
@@ -7,7 +9,7 @@ export interface User {
   description: string;
   country: string;
   relationship: number;
-  followers?: [] | null;
-  followings?: [] | null;
+  followers?: [{ userId: number }] | null;
+  followings?: [{ userId: number }] | null;
   posts?: [] | null;
 }
