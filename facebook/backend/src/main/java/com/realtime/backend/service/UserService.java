@@ -66,18 +66,18 @@ public class UserService {
     var userToFollow = userRepository.findById(followUserId).orElseThrow(() -> new NoSuchElementException("the user to follow with ID " + followUserId + " is not found "));
     var follower = Follower
       .builder()
-      .to(user)
-      .userId(userToFollow.getId())
+      .to(userToFollow)
+      .userId(user.getId())
       .build();
     var following = Following
       .builder()
-      .from(userToFollow)
-      .userId(user.getId())
+      .from(user)
+      .userId(userToFollow.getId())
       .build();
 
-    if(user.getFollowers().contains(follower)) throw new AlreadyFollowingException("you allready follow this user");
-    user.addFollower(follower);
-    userToFollow.addFollowing(following);
+    if(userToFollow.getFollowers().contains(follower)) throw new AlreadyFollowingException("you allready follow this user");
+    userToFollow.addFollower(follower);
+    user.addFollowing(following);
     userRepository.save(user);
     userRepository.save(userToFollow);
     return "user has been followed";
@@ -88,19 +88,18 @@ public class UserService {
     var userToFollow = userRepository.findById(unfollowUserId).orElseThrow(() -> new NoSuchElementException("the user to follow with ID " + unfollowUserId + " is not found "));
     var follower = Follower
       .builder()
-      .to(user)
-      .userId(userToFollow.getId())
+      .to(userToFollow)
+      .userId(user.getId())
       .build();
     var following = Following
       .builder()
-      .from(userToFollow)
-      .userId(user.getId())
+      .from(user)
+      .userId(userToFollow.getId())
       .build();
 
-    if(!user.getFollowers().contains(follower)) throw new NotFollowerException("you dont follow this user");
-    user.removeFollower(follower);
-    userToFollow.removeFollowing(following);
-    System.out.println("lista   "+user.getFollowers().size());
+    if(!userToFollow.getFollowers().contains(follower)) throw new NotFollowerException("you dont follow this user");
+    userToFollow.removeFollower(follower);
+    user.removeFollowing(following);
 
     userRepository.save(user);
     userRepository.save(userToFollow);
@@ -108,14 +107,14 @@ public class UserService {
   }
 
   public List<FriendsResponse> getFriends(Integer userId) {
-    var followersList = userRepository.findById(userId)
+    var followingsList = userRepository.findById(userId)
       .orElseThrow(() -> new NoSuchElementException("the user with ID " + userId + " is not found "))
-      .getFollowers();
-    return followersList.stream()
-      .map(follower->{
+      .getFollowings();
+    return followingsList.stream()
+      .map(following->{
         var friend = userRepository
-          .findById(follower.getUserId())
-          .orElseThrow(() -> new NoSuchElementException("the user with ID " + follower.getUserId() + " is not found "));
+          .findById(following.getUserId())
+          .orElseThrow(() -> new NoSuchElementException("the user with ID " + following.getUserId() + " is not found "));
         return FriendsResponse.builder()
           ._id(friend.getId())
           .name(friend.getName())

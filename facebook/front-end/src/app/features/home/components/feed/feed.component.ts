@@ -18,7 +18,6 @@ import { UserService } from 'src/app/core/services/user.service';
 import { Post } from 'src/app/models/post.model';
 import { User } from 'src/app/models/user.model';
 import {
-  selectTokenId,
   selectUserData,
 } from 'src/app/store/user/user.selectors';
 

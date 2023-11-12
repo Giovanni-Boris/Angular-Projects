@@ -1,7 +1,7 @@
 import { Friend } from './friend.models';
 
 export interface User {
-  userId: number;
+  userId: number ;
   name: string;
   email: string;
   profilePicture: string;
@@ -9,7 +9,11 @@ export interface User {
   description: string;
   country: string;
   relationship: number;
-  followers?: [{ userId: number }] | null;
-  followings?: [{ userId: number }] | null;
-  posts?: [] | null;
+  followers: Follow[] ;
+  followings: Follow[];
+  posts: [] ;
+}
+
+export interface Follow {
+  userId:number;
 }

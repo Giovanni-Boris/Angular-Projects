@@ -4,6 +4,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { UserService } from 'src/app/core/services/user.service';
 import { Friend } from 'src/app/models/friend.models';
 import { User } from 'src/app/models/user.model';
+import { followUser, unfollowUser } from 'src/app/store/user/user.actions';
 import { selectUserData } from 'src/app/store/user/user.selectors';
 
 @Component({
@@ -38,10 +39,11 @@ export class ProfileRightbarComponent implements OnInit, OnDestroy {
         this.isFollow();
       });
   }
-  isFollow(){
+  isFollow() {
     this.followed =
-      this.currentUser?.followers?.some((el) => el.userId === this.user?.userId) ||
-      false;
+      this.currentUser?.followings.some(
+        (el) => el.userId === this.user?.userId
+      ) || false;
   }
 
   getFriends(id: number) {
@@ -50,7 +52,17 @@ export class ProfileRightbarComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((friends) => (this.friends = friends));
   }
-  handleClick() {}
+  handleClick() {
+    if(!this.currentUser || !this.user) return;
+    if (this.followed)
+      this.store.dispatch(
+        unfollowUser({userId :this.currentUser.userId, id:this.user.userId})
+      );
+    else 
+      this.store.dispatch(
+        followUser({userId :this.currentUser.userId, id:this.user.userId})
+      );
+  }
 
   ngOnDestroy(): void {
     this.ngOnDestroy$.next();

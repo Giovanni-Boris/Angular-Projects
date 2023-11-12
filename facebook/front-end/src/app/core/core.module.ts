@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { TokenInterceptor } from './interceptor/token.interceptor';
-import { HttpClientModule ,HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -12,7 +12,6 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     MatIconModule,
-    HttpClientModule,
     CommonModule,
     RouterModule
   ],

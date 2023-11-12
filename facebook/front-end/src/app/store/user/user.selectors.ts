@@ -17,9 +17,9 @@ export const selectIsAuth = createSelector(
 );
 export const selectUserData = createSelector(
   authFeature,
-  (state) => state.user
+  (state) => state.user.userId === 0 ? null : state.user
 );
 export const selectUserName = createSelector(
   authFeature,
-  (state) => state.user?.name,
+  (state) => state.user.name,
 );

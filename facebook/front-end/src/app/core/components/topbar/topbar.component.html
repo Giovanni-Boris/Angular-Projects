@@ -31,6 +31,6 @@
     </div>
   </div>
   <a [routerLink]="['/profile',(user$ | async)?.name]">
-    <img alt="" [src]="((user$ | async)?.profilePicture  || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIy2vRwSRoUACatub962auO36Uo5OjNQ5wCQ&usqp=CAU') " alt="" class="topbarImg" />
+    <img alt="" [src]="((user$ | async)?.profilePicture  || 'assets/person/noAvatar.png') " alt="" class="topbarImg" />
   </a>
   </div>

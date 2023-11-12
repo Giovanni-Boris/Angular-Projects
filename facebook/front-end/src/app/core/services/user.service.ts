@@ -9,53 +9,64 @@ import { Friend } from 'src/app/models/friend.models';
 @Injectable({
   providedIn: 'root',
 })
-
 export class UserService {
+  constructor(private http: HttpClient) {
+    console.info('user service created');
+  }
 
-  constructor(private http: HttpClient) {}
-
-  getUser( id: number = -1, name: string = "") : Observable<User> {
-    let api = "user?" + (id==-1 ? `name=${name}` : `userId=${id}`);
-    return this.http
-      .get<User>( Global.API_URL+api, {})
-      .pipe(
-        tap(data=>console.log("User  ", data)),
-        catchError(this.handleError)
-      )
-    ;
+  getUser(id: number = -1, name: string = ''): Observable<User> {
+    let api = 'user?' + (id == -1 ? `name=${name}` : `userId=${id}`);
+    return this.http.get<User>(Global.API_URL + api, {}).pipe(
+      tap((data) => console.log('User  ', data)),
+      catchError(this.handleError)
+    );
   }
-  getTimelinePosts( userId:number= -1) : Observable<Post[]> {
-    if(userId===-1) return throwError(()=>"Cannot be negative");
+  getTimelinePosts(userId: number = -1): Observable<Post[]> {
+    if (userId === -1) return throwError(() => 'Cannot be negative');
     return this.http
-      .get<Post[]>( Global.API_URL+`post/timeline/${userId}`, {})
+      .get<Post[]>(Global.API_URL + `post/timeline/${userId}`, {})
       .pipe(
-        tap(data=>console.log("Posts  ", data)),
+        tap((data) => console.log('Posts  ', data)),
         catchError(this.handleError)
-      )
-    ;
+      );
   }
-  getProfilePosts( name:string = "") : Observable<Post[]> {
-    if(name==="") return throwError(()=>"Cannot be negative");
+  getProfilePosts(name: string = ''): Observable<Post[]> {
+    if (name === '') return throwError(() => 'Cannot be negative');
     return this.http
-      .get<Post[]>( Global.API_URL+`post/profile/${name}`, {})
+      .get<Post[]>(Global.API_URL + `post/profile/${name}`, {})
       .pipe(
-        tap(data=>console.log("Posts  ", data)),
+        tap((data) => console.log('Posts  ', data)),
         catchError(this.handleError)
-      )
-    ;
+      );
   }
-  getFriends( id: number = -1) : Observable<Friend[]> {
-    if(id===-1) throwError(()=>"Cannot be negative");
+  getFriends(id: number = -1): Observable<Friend[]> {
+    if (id === -1) throwError(() => 'Cannot be negative');
     return this.http
-      .get<Friend[]>( Global.API_URL+`user/friends/${id}`, {})
+      .get<Friend[]>(Global.API_URL + `user/friends/${id}`, {})
       .pipe(
-        tap(data=>console.log("friends", data)),
+        tap((data) => console.log('friends', data)),
         catchError(this.handleError)
+      );
+  }
+  followUser(id: number, userId: number): Observable<string> {
+    return this.http
+      .put(
+        Global.API_URL + `user/${id}/follow`,
+        { userId },
+        { responseType: 'text' }
       )
-    ;
+      .pipe(catchError(this.handleError));
+  }
+  unfollowUser(id: number, userId: number): Observable<string> {
+    return this.http
+      .put(
+        Global.API_URL + `user/${id}/unfollow`,
+        { userId },
+        { responseType: 'text' }
+      )
+      .pipe(catchError(this.handleError));
   }
   private handleError(err: HttpErrorResponse): Observable<never> {
     return throwError(() => err);
   }
-
 }
