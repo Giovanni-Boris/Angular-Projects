@@ -35,7 +35,6 @@ import { ProfileRightbarComponent } from './components/profile-rightbar/profile-
     CoreModule,
     MatIconModule,
     FormsModule
-
   ]
 })
 export class HomeModule { }

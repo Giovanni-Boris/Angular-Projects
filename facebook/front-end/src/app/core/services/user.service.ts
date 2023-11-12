@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { Global } from 'src/global';
-import { Post } from 'src/app/models/post.model';
+import { Post, PostUpload } from 'src/app/models/post.model';
 import { Friend } from 'src/app/models/friend.models';
 
 @Injectable({
@@ -40,7 +40,7 @@ export class UserService {
       );
   }
   getFriends(id: number = -1): Observable<Friend[]> {
-    if (id === -1) throwError(() => 'Cannot be negative');
+    if (id === -1) return throwError(() => 'Cannot be negative');
     return this.http
       .get<Friend[]>(Global.API_URL + `user/friends/${id}`, {})
       .pipe(
@@ -64,6 +64,11 @@ export class UserService {
         { userId },
         { responseType: 'text' }
       )
+      .pipe(catchError(this.handleError));
+  }
+  createPost(postUpload: PostUpload): Observable<Post> {
+    return this.http
+      .post<Post>(Global.API_URL + `post/`, postUpload)
       .pipe(catchError(this.handleError));
   }
   private handleError(err: HttpErrorResponse): Observable<never> {

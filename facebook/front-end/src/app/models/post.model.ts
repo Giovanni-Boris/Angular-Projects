@@ -6,3 +6,10 @@ export interface Post {
   creationdate: string
   updatedate: string
 }
+
+
+export interface PostUpload {
+  description: String;
+  img: String;
+  userId: number;
+}
