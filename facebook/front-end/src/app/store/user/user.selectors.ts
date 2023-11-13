@@ -7,6 +7,12 @@ export const selectToken = createSelector(
   authFeature,
   (state) => state.token,
 );
+
+export const selectIsFecthing = createSelector(
+  authFeature,
+  (state) => state.isFetching ,
+);
+
 export const selectTokenId = createSelector(
   authFeature,
   (state) => state.token?.id,

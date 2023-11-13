@@ -44,7 +44,7 @@ export const initialState: AuthState = {
 
 export const authReducer = createReducer(
   initialState,
-  on(login, (state) => ({ ...state, isLoading: true })),
+  on(login, (state) => ({ ...state, isFetching: true })),
   on(loginSuccess, (state, { token }) => ({
     ...state,
     token,
@@ -53,7 +53,7 @@ export const authReducer = createReducer(
     ...state,
     error,
   })),
-  on(getUserData, (state) => ({ ...state, isLoading: true })),
+  on(getUserData, (state) => ({ ...state, isFetching: true })),
   on(getUserDataSuccess, (state, { user }) => ({
     ...state,
     user,
@@ -62,7 +62,7 @@ export const authReducer = createReducer(
     ...state,
     error,
   })),
-  on(followUser, (state) => ({ ...state, isLoading: true })),
+  on(followUser, (state) => ({ ...state, isFetching: true })),
   on(followUserSuccess, (state, { id }) => ({
     ...state,
     user: {
@@ -74,7 +74,7 @@ export const authReducer = createReducer(
     ...state,
     error,
   })),
-  on(unfollowUser, (state) => ({ ...state, isLoading: true })),
+  on(unfollowUser, (state) => ({ ...state, isFetching: true })),
   on(unfollowUserSuccess, (state, { id }) => ({
     ...state,
     user: {

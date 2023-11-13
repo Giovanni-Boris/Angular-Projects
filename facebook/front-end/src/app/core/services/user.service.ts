@@ -10,14 +10,13 @@ import { Friend } from 'src/app/models/friend.models';
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   getUser(id: number = -1, name: string = ''): Observable<User> {
     let api = 'user?' + (id == -1 ? `name=${name}` : `userId=${id}`);
-    return this.http.get<User>(Global.API_URL + api, {}).pipe(
-      catchError(this.handleError)
-    );
+    return this.http
+      .get<User>(Global.API_URL + api, {})
+      .pipe(catchError(this.handleError));
   }
   getTimelinePosts(userId: number = -1): Observable<Post[]> {
     if (userId === -1) return throwError(() => 'Cannot be negative');
@@ -41,9 +40,7 @@ export class UserService {
     if (id === -1) return throwError(() => 'Cannot be negative');
     return this.http
       .get<Friend[]>(Global.API_URL + `user/friends/${id}`, {})
-      .pipe(
-        catchError(this.handleError)
-      );
+      .pipe(catchError(this.handleError));
   }
   followUser(id: number, userId: number): Observable<string> {
     return this.http

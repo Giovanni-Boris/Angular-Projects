@@ -62,6 +62,10 @@
   font-size: 20px;
   font-weight: 500;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 }
 .loginButton:focus {
   outline: none;
@@ -84,5 +88,8 @@
   color: #fff;
   font-size: 20px;
   font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
 }
