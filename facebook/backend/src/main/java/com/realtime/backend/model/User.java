@@ -23,7 +23,9 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue
     private Integer id;
+    @Column(unique = true)
     private String name;
+    @Column(unique = true)
     private String email;
     private String password;
     private String profilePicture;

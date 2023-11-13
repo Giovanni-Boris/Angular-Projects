@@ -1,8 +1,43 @@
-<div className="post">
-  <div className="postWrapper">
-    <div className="postTop">
-      <div className="postTopLeft">
-        Post
+<div class="post">
+  <div class="postWrapper">
+    <div class="postTop">
+      <div class="postTopLeft">
+        <a [routerLink]="['/profile', user?.name]">
+          <img
+            class="postProfileImg"
+            [src]="user && (user.profilePicture || 'assets/person/noAvatar.png')"
+            alt=""
+          />
+        </a>
+        <span class="postUsername">{{ user?.name }}</span>
+        <span class="postDate">{{ post.creationdate | date: 'medium' }}</span>
+      </div>
+      <div class="postTopRight">
+        <i class="material-icons">more_vert</i>
+      </div>
+    </div>
+    <div class="postCenter">
+      <span class="postText">{{ post.description }}</span>
+      <img class="postImg" [src]="post.img" alt="" />
+    </div>
+    <div class="postBottom">
+      <div class="postBottomLeft">
+        <img
+          class="likeIcon"
+          [src]="'assets/like.png'"
+          alt=""
+          (click)="handleLike()"
+        />
+        <img
+          class="likeIcon"
+          [src]="'assets/heart.png'"
+          alt=""
+          (click)="handleLike()"
+        />
+        <span class="postLikeCounter">{{ likes }} people like it</span>
+      </div>
+      <div class="postBottomRight">
+        <span class="postCommnetText">{{ post.description }} comments</span>
       </div>
     </div>
   </div>

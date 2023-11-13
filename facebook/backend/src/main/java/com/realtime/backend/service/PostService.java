@@ -68,23 +68,27 @@ public class PostService {
       .orElseThrow(()-> new NoSuchElementException("Post not found"));
   }
 
-  public List<Post> getAllPosts(String name){
+  public List<PostResponse> getAllPosts(String name){
     var user = userRepository.findByName(name)
       .orElseThrow(()-> new NoSuchElementException("User not found"));
-    return user.getPosts();
+    return user.getPosts().stream()
+      .map((post)-> generateResponge(post,post.getUser()) )
+      .toList();
   }
 
   //get a timelime posts
-  public List<Post> getTimelinePosts(Integer userId){
+  public List<PostResponse> getTimelinePosts(Integer userId){
     var currentUser = userRepository.findById(userId)
       .orElseThrow(()-> new NoSuchElementException("User not found"));
     var userPosts = currentUser.getPosts();
-    List<Post> friendPosts = currentUser.getFollowers()
+    List<Post> friendPosts = currentUser.getFollowings()
       .stream()
       .flatMap(follower -> postRepository.findByUser_Id(follower.getUserId()).stream())
       .toList();
     userPosts.addAll(friendPosts);
-    return userPosts;
+    return userPosts.stream()
+      .map((post)-> generateResponge(post,post.getUser()) )
+      .toList();
 
   }
 
@@ -94,7 +98,9 @@ public class PostService {
       .likes(post.getLikes())
       .img(post.getImg())
       .description(post.getDescription())
+      .creationdate(post.getCreationdate())
       .userId(user.getId())
+      .id(post.getId())
       .build();
   }
 

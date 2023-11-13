@@ -41,7 +41,6 @@ export class ShareComponent implements OnInit, OnDestroy {
   }
 
   handleSubmit() {
-    console.log(this.file, this.desc);
     if (this.file && this.userData) {
       let currentFileUpload: FileUpload = {
         description: this.desc,
@@ -53,8 +52,8 @@ export class ShareComponent implements OnInit, OnDestroy {
         .pipe(takeUntil(this.ngDestroyed$))
         .subscribe({
           next: (percentage) => {
-            console.log(percentage);
             this.file = null;
+            this.desc = "";
           },
           error: (error) => {
             console.log(error);

@@ -39,9 +39,9 @@ export class FileUploadService {
                 })
               )
             )
-            .subscribe((post) => {
-              //console.log(post);
-            });
+            .subscribe();
+            //console.log(post);
+            
         })
       )
       .subscribe();

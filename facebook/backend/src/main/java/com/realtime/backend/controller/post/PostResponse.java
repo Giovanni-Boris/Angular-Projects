@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -17,5 +18,7 @@ public class PostResponse {
   private String img;
   private List<PostLike> likes;
   private Integer userId;
+  private Date creationdate;
+  private Integer id;
 
 }

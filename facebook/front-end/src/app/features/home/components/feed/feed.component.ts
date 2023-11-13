@@ -7,19 +7,11 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {
-  Subject,
-  filter,
-  map,
-  switchMap,
-  takeUntil,
-} from 'rxjs';
+import { Subject, filter, map, switchMap, takeUntil } from 'rxjs';
 import { UserService } from 'src/app/core/services/user.service';
 import { Post } from 'src/app/models/post.model';
 import { User } from 'src/app/models/user.model';
-import {
-  selectUserData,
-} from 'src/app/store/user/user.selectors';
+import { selectUserData } from 'src/app/store/user/user.selectors';
 
 @Component({
   selector: 'app-feed',
@@ -27,21 +19,19 @@ import {
   styleUrls: ['./feed.component.css'],
 })
 export class FeedComponent implements OnInit, OnDestroy, OnChanges {
-  
   @Input()
   name: String | undefined;
   _user: User | null = null;
   posts: Post[] = [];
   ngDestroyed$ = new Subject<void>();
 
-  set user( value: User | null ){
-    if(!value) return;
+  set user(value: User | null) {
+    if (!value || this.name !== undefined) return;
     this._user = value;
-    if(value.name !== this.name) return;
     this.timelinePosts(value.userId);
   }
-  get user(){
-    return this._user; 
+  get user() {
+    return this._user;
   }
   public constructor(private store: Store, private userService: UserService) {}
   ngOnInit(): void {
@@ -51,12 +41,12 @@ export class FeedComponent implements OnInit, OnDestroy, OnChanges {
       .subscribe((user) => {
         this.user = user;
       });
-    
   }
-  private timelinePosts(userId: number){
+  private timelinePosts(userId: number) {
     this.userService
       .getTimelinePosts(userId)
-      .pipe(map((posts) => this.sortPosts(posts)));
+      .pipe(takeUntil(this.ngDestroyed$))
+      .subscribe((posts) => (this.posts = posts));
   }
   ngOnChanges(changes: SimpleChanges): void {
     let changeName = changes['name'];
@@ -67,19 +57,9 @@ export class FeedComponent implements OnInit, OnDestroy, OnChanges {
     ) {
       this.userService
         .getProfilePosts(changeName.currentValue)
-        .pipe(
-          map((posts) => this.sortPosts(posts)),
-          takeUntil(this.ngDestroyed$)
-        )
+        .pipe(takeUntil(this.ngDestroyed$))
         .subscribe((posts) => (this.posts = posts));
     }
-  }
-  private sortPosts(posts: Post[]): Post[] {
-    return posts.sort(
-      (p1, p2) =>
-        new Date(p2.creationdate).getTime() -
-        new Date(p1.creationdate).getTime()
-    );
   }
   ngOnDestroy(): void {
     this.ngDestroyed$.next();

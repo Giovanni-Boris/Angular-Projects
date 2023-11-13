@@ -1,12 +1,11 @@
 export interface Post {
+  description: string;
+  img: string;
+  likes: [{ userId: number }];
+  creationdate: string;
+  userId: number;
   id: number
-  description: string
-  img: string
-  likes: any[]
-  creationdate: string
-  updatedate: string
 }
-
 
 export interface PostUpload {
   description: String;
