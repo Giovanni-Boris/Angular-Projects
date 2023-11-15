@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subject, takeUntil } from 'rxjs';
 import { FileUploadService } from 'src/app/core/services/file.service';
@@ -12,11 +18,13 @@ import { selectUserData } from 'src/app/store/user/user.selectors';
   styleUrls: ['./share.component.css'],
 })
 export class ShareComponent implements OnInit, OnDestroy {
+  @Output() getPosts = new EventEmitter<void>();
   ngDestroyed$ = new Subject<void>();
   userData: User | null = null;
   file: File | null = null;
-  desc: String = '';
+  desc: string = '';
   fileUrl: string = '';
+  timer: NodeJS.Timeout | null = null;
   public constructor(
     private store: Store,
     private uploadService: FileUploadService
@@ -52,11 +60,13 @@ export class ShareComponent implements OnInit, OnDestroy {
         .pipe(takeUntil(this.ngDestroyed$))
         .subscribe({
           next: (percentage) => {
+            //console.log(percentage)
             this.file = null;
-            this.desc = "";
+            this.desc = '';
           },
-          error: (error) => {
-            console.log(error);
+          complete: () => {
+            //console.log('complete');
+            this.getPosts.emit();
           },
         });
     }

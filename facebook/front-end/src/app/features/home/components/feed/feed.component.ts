@@ -42,11 +42,16 @@ export class FeedComponent implements OnInit, OnDestroy, OnChanges {
         this.user = user;
       });
   }
-  private timelinePosts(userId: number) {
+  getPosts() {
+    if (this.user) this.timelinePosts(this.user.userId);
+  }
+  timelinePosts(userId: number) {
     this.userService
       .getTimelinePosts(userId)
       .pipe(takeUntil(this.ngDestroyed$))
-      .subscribe((posts) => (this.posts = posts));
+      .subscribe((posts) => {
+        this.posts = posts;
+      });
   }
   ngOnChanges(changes: SimpleChanges): void {
     let changeName = changes['name'];

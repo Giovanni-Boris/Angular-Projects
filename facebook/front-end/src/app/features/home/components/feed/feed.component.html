@@ -1,6 +1,6 @@
   <div class="feedWrapper">
     <ng-container *ngIf="!name || name === user?.name">
-      <app-share></app-share>
+      <app-share (getPosts)="getPosts()"></app-share>
     </ng-container>
 
     <div *ngFor="let post of posts" class="post">

@@ -1,5 +1,5 @@
 export interface FileUpload {
-  description: String;
+  description: string;
   userId: number;
   file: File
 }

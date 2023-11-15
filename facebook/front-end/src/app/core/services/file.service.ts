@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 
-import { Observable } from 'rxjs';
+import { Observable, Subject, combineLatest } from 'rxjs';
 import { concatMap, finalize } from 'rxjs/operators';
 import { FileUpload } from 'src/app/models/fileUpload.model';
 import { UserService } from './user.service';
@@ -17,13 +17,13 @@ export class FileUploadService {
     private userService: UserService
   ) {}
 
-  pushFileToStorage(fileUpload: FileUpload): Observable<number | undefined> {
+  pushFileToStorage(fileUpload: FileUpload): Observable<any> {
     const filePath = `${this.basePath}/${
       new Date().getTime() + fileUpload.file.name
     }`;
     const storageRef = this.storage.ref(filePath);
     const uploadTask = this.storage.upload(filePath, fileUpload.file);
-
+    const dataSubject = new Subject<boolean>();
     uploadTask
       .snapshotChanges()
       .pipe(
@@ -39,13 +39,16 @@ export class FileUploadService {
                 })
               )
             )
-            .subscribe();
+            .subscribe(()=>{
+              dataSubject.next(true);
+              dataSubject.complete();
+            });
             //console.log(post);
             
         })
       )
       .subscribe();
 
-    return uploadTask.percentageChanges();
+    return combineLatest([uploadTask.percentageChanges(), dataSubject.asObservable()]) ;
   }
 }
