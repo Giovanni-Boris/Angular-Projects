@@ -11,11 +11,11 @@ import { CoreModule } from './core/core.module';
 import { UserService } from './core/services/user.service';
 import { AuthService } from './core/services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getStorage, provideStorage } from '@angular/fire/storage';
+
 import { FileUploadService } from './core/services/file.service';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireModule } from '@angular/fire/compat';
+import { metaReducers } from './store/meta.reducers';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +24,7 @@ import { AngularFireModule } from '@angular/fire/compat';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    StoreModule.forRoot({ auth: authReducer }),
+    StoreModule.forRoot({ auth: authReducer }, { metaReducers }),
     EffectsModule.forRoot([AuthEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     AngularFireModule.initializeApp({
@@ -41,4 +41,3 @@ import { AngularFireModule } from '@angular/fire/compat';
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-//provideFirebaseApp(() => initializeApp({"projectId":"facebook-c4d8b","appId":"1:850090759577:web:2c91d546ae187f49deef08","storageBucket":"facebook-c4d8b.appspot.com","locationId":"us-central","apiKey":"AIzaSyCbOAU012VQPG4aiDgcHsM20S2vSLBHk-I","authDomain":"facebook-c4d8b.firebaseapp.com","messagingSenderId":"850090759577"})),

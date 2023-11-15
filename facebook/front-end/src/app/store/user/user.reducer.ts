@@ -52,6 +52,7 @@ export const authReducer = createReducer(
   on(loginFailure, (state, { error }) => ({
     ...state,
     error,
+    isFetching: false
   })),
   on(getUserData, (state) => ({ ...state, isFetching: true })),
   on(getUserDataSuccess, (state, { user }) => ({
@@ -61,6 +62,7 @@ export const authReducer = createReducer(
   on(getUserDataFailure, (state, { error }) => ({
     ...state,
     error,
+    isFetching: false
   })),
   on(followUser, (state) => ({ ...state, isFetching: true })),
   on(followUserSuccess, (state, { id }) => ({
@@ -73,6 +75,7 @@ export const authReducer = createReducer(
   on(followUserFailure, (state, { error }) => ({
     ...state,
     error,
+    isFetching: false
   })),
   on(unfollowUser, (state) => ({ ...state, isFetching: true })),
   on(unfollowUserSuccess, (state, { id }) => ({
@@ -87,5 +90,6 @@ export const authReducer = createReducer(
   on(unfollowUserFailure, (state, { error }) => ({
     ...state,
     error,
+    isFetching: false
   }))
 );

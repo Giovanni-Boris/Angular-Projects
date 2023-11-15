@@ -20,7 +20,11 @@
           class="loginInput"
           formControlName="password"
         />
-        <button class="loginButton" [disabled]="isFetching$ | async">
+        <button
+          class="loginButton"
+          type="submit"
+          [disabled]="isFetching$ | async"
+        >
           <mat-spinner
             *ngIf="isFetching$ | async; else loginButtonTemplate"
             diameter="30"
@@ -30,18 +34,21 @@
           <ng-template #loginButtonTemplate> Log In </ng-template>
         </button>
         <span class="loginForgot">Forgot Password</span>
-        <a [routerLink]="'/register'" style="display: flex; justify-content: center;">
-          <button class="loginRegisterButton" [disabled]="isFetching$ | async">
-            <mat-spinner
-              *ngIf="isFetching$ | async; else registerButtonTemplate"
-              diameter="30"
-              color="warn"
-            ></mat-spinner>
-            <ng-template #registerButtonTemplate>
-              Create a New Account
-            </ng-template>
-          </button>
-        </a>
+        <button
+          [routerLink]="'/auth/register'"
+          type="button"
+          class="loginRegisterButton"
+          [disabled]="isFetching$ | async"
+        >
+          <mat-spinner
+            *ngIf="isFetching$ | async; else registerButtonTemplate"
+            diameter="30"
+            color="warn"
+          ></mat-spinner>
+          <ng-template #registerButtonTemplate>
+            Create a New Account
+          </ng-template>
+        </button>
       </form>
     </div>
   </div>
