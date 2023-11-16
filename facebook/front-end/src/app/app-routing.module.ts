@@ -14,6 +14,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/auth/auth.module').then(m => m.AuthModule)
   },
+  {
+    path: 'messenger',
+    loadChildren: () =>
+      import('./features/messenger/messenger.module').then(m => m.MessengerModule)
+  },
   { path: '**', redirectTo: '/auth/login', pathMatch: 'full' }
 ];
 
