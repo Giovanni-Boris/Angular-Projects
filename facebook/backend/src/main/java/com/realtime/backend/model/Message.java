@@ -6,6 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.sql.Timestamp;
 
 @Data
 @Builder
@@ -16,9 +20,13 @@ public class Message {
   @Id
   @GeneratedValue
   private Integer id;
-  private String msg;
+  private String text;
   private Integer owner;
   @ManyToOne
   @JoinColumn(name = "conversation_id")
-  private Conversation message;
+  private Conversation conversation;
+  @CreationTimestamp
+  private Timestamp creationdate;
+  @UpdateTimestamp
+  private Timestamp updatedate;
 }

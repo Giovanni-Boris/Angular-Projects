@@ -2,12 +2,15 @@ package com.realtime.backend.service;
 
 import com.realtime.backend.controller.conversation.ConversationRequest;
 import com.realtime.backend.controller.conversation.ConversationResponseDTO;
+import com.realtime.backend.controller.exception.NotFollowerException;
 import com.realtime.backend.model.Conversation;
+import com.realtime.backend.model.Message;
 import com.realtime.backend.repository.ConversationRepository;
 import com.realtime.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -18,6 +21,7 @@ public class ConversationService {
   private final ConversationRepository conversationRepository;
   private final UserRepository userRepository;
   public ConversationResponseDTO createConversation(ConversationRequest conversationRequest) {
+    if(conversationRequest.getSenderId()==conversationRequest.getReceiverId()) throw new NoSuchElementException("Id must be differents");
     var user1 = userRepository.findById(conversationRequest.getSenderId())
       .orElseThrow(() -> new NoSuchElementException("User not found: " + conversationRequest.getSenderId()));
 
@@ -25,6 +29,7 @@ public class ConversationService {
       .orElseThrow(() -> new NoSuchElementException("User not found: " + conversationRequest.getReceiverId()));
     var conversation = Conversation.builder()
         .users(List.of(user1,user2))
+        .messages(new ArrayList<>())
         .build();
     user1.getConversations().add(conversation);
     user2.getConversations().add(conversation);

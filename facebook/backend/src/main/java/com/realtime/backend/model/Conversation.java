@@ -26,7 +26,7 @@ public class Conversation {
   @ManyToMany(mappedBy = "conversations", fetch = FetchType.LAZY)
   private List<User> users;
 
-  @OneToMany(mappedBy = "message", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+  @OneToMany(mappedBy = "conversation", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
   private List<Message> messages;
 
   @CreationTimestamp
