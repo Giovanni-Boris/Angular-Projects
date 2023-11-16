@@ -34,7 +34,7 @@ public class JwtService {
     ){
         return Jwts
                 .builder()
-                .(setClaimsextractClaims)
+                .setClaims(extractClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration((new Date(System.currentTimeMillis()+  2 * 60 * 60 * 1000)))

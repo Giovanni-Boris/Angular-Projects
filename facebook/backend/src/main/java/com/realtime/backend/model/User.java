@@ -44,6 +44,16 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
     @JsonManagedReference
     private List<Post> posts;
+
+
+    //Conversation
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+      name = "user_conversation",
+      joinColumns = @JoinColumn(name = "user_id"),
+      inverseJoinColumns = @JoinColumn(name = "conversation_id")
+    )
+    private List<Conversation> conversations;
     //Followers
     public void addFollower(Follower toFollow ) {
         this.followers.add(toFollow);

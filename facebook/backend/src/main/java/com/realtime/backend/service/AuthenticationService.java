@@ -30,6 +30,7 @@ public class AuthenticationService {
       .followings(new ArrayList<>())
       .followers( new ArrayList<>())
       .posts(new ArrayList<>())
+      .conversations(new ArrayList<>())
       .description("")
       .coverPicture("")
       .profilePicture("")
