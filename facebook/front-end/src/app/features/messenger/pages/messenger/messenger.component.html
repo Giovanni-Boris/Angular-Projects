@@ -1,49 +1,43 @@
-<app-topbar class="topbar"/>
+<app-topbar class="topbar" />
 <div class="messenger">
   <div class="chatMenu">
     <div class="chatMenuWrapper">
       <input placeholder="Search for friends" class="chatMenuInput" />
-        <div *ngFor="let el of conversations " (click)="currentChat = el">
-          <app-conversation [conversation]="el" [currentUser]="user" />
-        </div>
+      <div *ngFor="let el of conversations" (click)="currentChat = el">
+        <app-conversation [conversation]="el" [currentUser]="user" />
+      </div>
     </div>
   </div>
   <div class="chatBox">
     <div class="chatBoxWrapper">
-      <!--{currentChat ? (
-        <>
-          <div class="chatBoxTop">
-            {messages.map((m, index) => (
-              <div ref={scrollRef} key={index}>
-                <Message message={m} own={m.sender === user._id} />
-              </div>
-            ))}
+      <ng-container *ngIf="currentChat; else noConversation">
+        <div class="chatBoxTop">
+          <div *ngFor="let message of messages; let i = index" #scrollRef>
+            <app-message
+              [message]="message"
+              [own]="message.owner === user?.userId"
+            ></app-message>
           </div>
-          <div class="chatBoxBottom">
-            <textarea
-              class="chatMessageInput"
-              placeholder="write something..."
-              onChange={(e) => setNewMessage(e.target.value)}
-              value={newMessage}
-            ></textarea>
-            <button class="chatSubmitButton" onClick={handleSubmit}>
-              Send
-            </button>
-          </div>
-        </>
-      ) : (
-        <span class="noConversationText">
-          Open a conversation to start
-        </span>
-      )}-->
+        </div>
+        <div class="chatBoxBottom">
+          <textarea
+            class="chatMessageInput"
+            placeholder="write something..."
+          ></textarea>
+          <button class="chatSubmitButton" (click)="handleSubmit()">
+            Send
+          </button>
+        </div>
+      </ng-container>
+      <ng-template #noConversation>
+        <span class="noConversationText">Open a conversation to start</span>
+      </ng-template>
     </div>
   </div>
   <div class="chatOnline">
     <div class="chatOnlineWrapper">
       <app-chat-online
-        onlineUsers={onlineUsers}
-        currentId={user._id}
-        setCurrentChat={setCurrentChat}
+        
       />
     </div>
   </div>
