@@ -3,11 +3,9 @@
   <div class="chatMenu">
     <div class="chatMenuWrapper">
       <input placeholder="Search for friends" class="chatMenuInput" />
-      <!--{conversations.map((el, index) => (
-        <div key={index} onClick={() => setCurrentChat(el)}>
-          <Conversation conversation={el} currentUser={user} />
+        <div *ngFor="let el of conversations " (click)="currentChat = el">
+          <app-conversation [conversation]="el" [currentUser]="user" />
         </div>
-      ))}-->
     </div>
   </div>
   <div class="chatBox">

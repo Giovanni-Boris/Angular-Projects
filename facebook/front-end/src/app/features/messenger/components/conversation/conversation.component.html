@@ -1,1 +1,12 @@
-<p>conversation works!</p>
+<div class="conversation">
+  <img
+    class="conversationImg"
+    [src]="
+      user && user.profilePicture
+        ? user.profilePicture
+        : 'assets/person/noAvatar.png'
+    "
+    alt=""
+  />
+  <span class="conversationName">{{ user?.name }} </span>
+</div>

@@ -17,7 +17,8 @@ const routes: Routes = [
   {
     path: 'messenger',
     loadChildren: () =>
-      import('./features/messenger/messenger.module').then(m => m.MessengerModule)
+      import('./features/messenger/messenger.module').then(m => m.MessengerModule),
+    canActivate: [AuthGuard.canActivate],
   },
   { path: '**', redirectTo: '/auth/login', pathMatch: 'full' }
 ];

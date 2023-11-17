@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class MessageComponent {
   @Input()
-  message! : String;
+  message! : any;
   @Input()
   own!: boolean
 }

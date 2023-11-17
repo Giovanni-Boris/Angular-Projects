@@ -16,7 +16,7 @@ export namespace AuthGuard {
         const router = inject(Router);
         return store.select(selectIsAuth).pipe(
             map((isAuth) => {
-                return true//isAuth ? true : router.parseUrl("/auth/login");
+                return isAuth ? true : router.parseUrl("/auth/login");
               })
         );
     }

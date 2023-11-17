@@ -1,7 +1,7 @@
 <div class="topbarLeft">
-
-  <span class="logo">messenger</span>
-
+  <a routerLink="/messenger">
+    <span class="logo">messenger</span>
+  </a>
 </div>
 <div class="topbarCenter">
   <div class="searchbar">
@@ -30,7 +30,12 @@
       <span class="topbarIconBadge">1</span>
     </div>
   </div>
-  <a [routerLink]="['/profile',(user$ | async)?.name]">
-    <img alt="" [src]="((user$ | async)?.profilePicture  || 'assets/person/noAvatar.png') " alt="" class="topbarImg" />
+  <a [routerLink]="['/profile', (user$ | async)?.name]">
+    <img
+      alt=""
+      [src]="(user$ | async)?.profilePicture || 'assets/person/noAvatar.png'"
+      alt=""
+      class="topbarImg"
+    />
   </a>
-  </div>
+</div>
