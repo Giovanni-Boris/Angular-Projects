@@ -8,17 +8,19 @@
       class="text-3xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray"
       [ngStyle]="{ background: 'blue', 'border-radius': '50%' }"
     >
-      <mat-icon aria-hidden="false" aria-label="Settings icon"
+      <mat-icon [inline]="true" aria-hidden="false" aria-label="Settings icon"
         >settings</mat-icon
       >
     </button>
   </div>
   @if (activeMenu) {
   <div class="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white">
-    Sidebar
+    <app-sidebar/>
   </div>
   } @else {
-  <div class="w-0 dark:bg-secondary-dark-bg">Sidebar</div>
+  <div class="w-0 dark:bg-secondary-dark-bg">
+    <app-sidebar/>
+  </div>
   }
   <div
     [ngClass]="
@@ -28,7 +30,7 @@
     "
   >
   <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
-    navbar
+    <app-navbar/>
   </div>
 </div>
 <div>

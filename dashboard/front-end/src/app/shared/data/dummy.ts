@@ -1,28 +1,16 @@
-import React from 'react';
-import { AiOutlineCalendar, AiOutlineShoppingCart, AiOutlineAreaChart, AiOutlineBarChart, AiOutlineStock } from 'react-icons/ai';
-import { FiShoppingBag, FiEdit, FiPieChart, FiBarChart, FiCreditCard, FiStar, FiShoppingCart } from 'react-icons/fi';
-import { BsKanban, BsBarChart, BsBoxSeam, BsCurrencyDollar, BsShield, BsChatLeft } from 'react-icons/bs';
-import { BiColorFill } from 'react-icons/bi';
-import { IoMdContacts } from 'react-icons/io';
-import { RiContactsLine, RiStockLine } from 'react-icons/ri';
-import { MdOutlineSupervisorAccount } from 'react-icons/md';
-import { HiOutlineRefresh } from 'react-icons/hi';
-import { TiTick } from 'react-icons/ti';
-import { GiLouvrePyramid } from 'react-icons/gi';
-import { GrLocation } from 'react-icons/gr';
-import avatar from './avatar.jpg';
-import avatar2 from './avatar2.jpg';
-import avatar3 from './avatar3.png';
-import avatar4 from './avatar4.jpg';
-import product1 from './product1.jpg';
-import product2 from './product2.jpg';
-import product3 from './product3.jpg';
-import product4 from './product4.jpg';
-import product5 from './product5.jpg';
-import product6 from './product6.jpg';
-import product7 from './product7.jpg';
-import product8 from './product8.jpg';
-
+const avatar ='assets/images/avatar.jpg';
+const avatar2 ='assets/images/avatar2.jpg';
+const avatar3 ='assets/images/avatar3.png';
+const avatar4 ='assets/images/avatar4.jpg';
+const product1 ='assets/images/product1.jpg';
+const product2 ='assets/images/product2.jpg';
+const product3 ='assets/images/product3.jpg';
+const product4 ='assets/images/product4.jpg';
+const product5 ='assets/images/product5.jpg';
+const product6 ='assets/images/product6.jpg';
+const product7 ='assets/images/product7.jpg';
+const product8 ='assets/images/product8.jpg';
+/*
 export const gridOrderImage = (props) => (
   <div>
     <img
@@ -139,7 +127,7 @@ const customerGridStatus = (props) => (
     <p style={{ background: props.StatusBg }} className="rounded-full h-3 w-3" />
     <p>{props.Status}</p>
   </div>
-);
+);*/
 export const areaPrimaryXAxis = {
   valueType: 'DateTime',
   labelFormat: 'y',
@@ -395,7 +383,7 @@ export const customersGrid = [
   { type: 'checkbox', width: '50' },
   { headerText: 'Name',
     width: '150',
-    template: customerGridImage,
+    template: "customerGridImage",
     textAlign: 'Center' },
   { field: 'ProjectName',
     headerText: 'Project Name',
@@ -406,7 +394,7 @@ export const customersGrid = [
     width: '130',
     format: 'yMd',
     textAlign: 'Center',
-    template: customerGridStatus },
+    template: "customerGridStatus" },
   {
     field: 'Weeks',
     headerText: 'Weeks',
@@ -436,7 +424,7 @@ export const customersGrid = [
 export const employeesGrid = [
   { headerText: 'Employee',
     width: '150',
-    template: gridEmployeeProfile,
+    template: "gridEmployeeProfile",
     textAlign: 'Center' },
   { field: 'Name',
     headerText: '',
@@ -451,7 +439,7 @@ export const employeesGrid = [
   { headerText: 'Country',
     width: '120',
     textAlign: 'Center',
-    template: gridEmployeeCountry },
+    template: "gridEmployeeCountry" },
 
   { field: 'HireDate',
     headerText: 'Hire Date',
@@ -475,7 +463,7 @@ export const links = [
     links: [
       {
         name: 'ecommerce',
-        icon: <FiShoppingBag />,
+        icon: "dashboard",
       },
     ],
   },
@@ -485,15 +473,15 @@ export const links = [
     links: [
       {
         name: 'orders',
-        icon: <AiOutlineShoppingCart />,
+        icon: "shopping_cart",
       },
       {
         name: 'employees',
-        icon: <IoMdContacts />,
+        icon: "contacts",
       },
       {
         name: 'customers',
-        icon: <RiContactsLine />,
+        icon: "account_circle",
       },
     ],
   },
@@ -502,19 +490,19 @@ export const links = [
     links: [
       {
         name: 'calendar',
-        icon: <AiOutlineCalendar />,
+        icon: "calendar_today",
       },
       {
         name: 'kanban',
-        icon: <BsKanban />,
+        icon: "view_module",
       },
       {
         name: 'editor',
-        icon: <FiEdit />,
+        icon: "edit",
       },
       {
         name: 'color-picker',
-        icon: <BiColorFill />,
+        icon: "format_color_fill",
       },
     ],
   },
@@ -523,36 +511,36 @@ export const links = [
     links: [
       {
         name: 'line',
-        icon: <AiOutlineStock />,
+        icon: "show_chart",
       },
       {
         name: 'area',
-        icon: <AiOutlineAreaChart />,
+        icon: "multiline_chart",
       },
 
       {
         name: 'bar',
-        icon: <AiOutlineBarChart />,
+        icon: "bar_chart",
       },
       {
         name: 'pie',
-        icon: <FiPieChart />,
+        icon: "pie_chart",
       },
       {
         name: 'financial',
-        icon: <RiStockLine />,
+        icon: "inventory_2",
       },
       {
         name: 'color-mapping',
-        icon: <BsBarChart />,
+        icon: "bar_chart",
       },
       {
         name: 'pyramid',
-        icon: <GiLouvrePyramid />,
+        icon: "loupe",
       },
       {
         name: 'stacked',
-        icon: <AiOutlineBarChart />,
+        icon: "bar_chart",
       },
     ],
   },
@@ -612,7 +600,7 @@ export const chatData = [
     time: '1:12 AM',
   },
 ];
-
+/*
 export const earningData = [
   {
     icon: <MdOutlineSupervisorAccount />,
@@ -703,7 +691,7 @@ export const recentTransactions = [
     pcColor: 'red-600',
   },
 ];
-
+/*
 export const weeklyStats = [
   {
     icon: <FiShoppingCart />,
@@ -729,7 +717,7 @@ export const weeklyStats = [
     iconBg: '#00C292',
     pcColor: 'green-600',
   },
-];
+];*/
 
 export const productsPerformance = [
   {
@@ -845,7 +833,7 @@ export const themeColors = [
     name: 'orange-theme',
   },
 ];
-
+/*
 export const userProfileData = [
   {
     icon: <BsCurrencyDollar />,
@@ -868,12 +856,12 @@ export const userProfileData = [
     iconColor: 'rgb(255, 244, 229)',
     iconBg: 'rgb(254, 201, 15)',
   },
-];
+];*/
 
 export const ordersGrid = [
   {
     headerText: 'Image',
-    template: gridOrderImage,
+    template: "gridOrderImage",
     textAlign: 'Center',
     width: '120',
   },
@@ -899,7 +887,7 @@ export const ordersGrid = [
   },
   {
     headerText: 'Status',
-    template: gridOrderStatus,
+    template: "gridOrderStatus",
     field: 'OrderItems',
     textAlign: 'Center',
     width: '120',
