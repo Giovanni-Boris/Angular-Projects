@@ -1,1 +1,39 @@
-<p>featured works!</p>
+<div class="featured">
+  <div class="top">
+    <h1 class="title">Total Revenue</h1>
+    <mat-icon>more_vert</mat-icon>
+  </div>
+  <div class="bottom">
+    <div class="featuredChart">
+      <app-circular-progress-bar [percentage]="70" />
+    </div>
+    <p class="title">Total sales made today</p>
+    <p class="amount">$420</p>
+    <p class="desc">
+      Previous transactions processing. Last payments may not be included.
+    </p>
+    <div class="summary">
+      <div class="item">
+        <div class="itemTitle">Target</div>
+        <div class="itemResult negative">
+          <mat-icon>keyboard_arrow_down</mat-icon>
+          <div class="resultAmount">$12.4k</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="itemTitle">Last Week</div>
+        <div class="itemResult positive">
+          <mat-icon>keyboard_arrow_up</mat-icon>
+          <div class="resultAmount">$12.4k</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="itemTitle">Last Month</div>
+        <div class="itemResult positive">
+          <mat-icon>keyboard_arrow_up</mat-icon>
+          <div class="resultAmount">$12.4k</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
