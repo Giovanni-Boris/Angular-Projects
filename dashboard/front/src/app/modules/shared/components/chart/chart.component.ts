@@ -12,7 +12,7 @@ import { Color, ScaleType } from '@swimlane/ngx-charts';
 export class ChartComponent {
   view: [number, number] = [730, 250];
   colorScheme: Color = {
-    domain: ['#8884d8', '#8884d8'],
+    domain: ['#99CCE5', '#FF7F7F'],
     group: ScaleType.Ordinal,
     selectable: true,
     name: 'Customer Usage',

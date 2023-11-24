@@ -1,7 +1,7 @@
 <div class="widget">
   <div class="left">
     <span class="title">{{ data?.title }}</span>
-    <span class="counter" *ngIf="data?.isMoney">{{ '$' }}  100 </span>
+    <span class="counter" >{{ (data?.isMoney ? '$' : '') }}  100 </span>
     <span class="link">{{ data?.link }}</span>
   </div>
   <div class="right">
