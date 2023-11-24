@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-sidebar',
+  selector: 'app-featured',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss'
+  templateUrl: './featured.component.html',
+  styleUrl: './featured.component.scss'
 })
-export class SidebarComponent {
+export class FeaturedComponent {
 
 }

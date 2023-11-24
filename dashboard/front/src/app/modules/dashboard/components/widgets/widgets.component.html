@@ -1,0 +1,14 @@
+<div class="widget">
+  <div class="left">
+    <span class="title">{{ data?.title }}</span>
+    <span class="counter" *ngIf="data?.isMoney">{{ '$' }}  100 </span>
+    <span class="link">{{ data?.link }}</span>
+  </div>
+  <div class="right">
+    <div class="percentage positive">
+      <mat-icon>keyboard_arrow_up</mat-icon>
+       20 %
+    </div>
+    <mat-icon [ngStyle]="data?.iconStyle">{{ data?.icon }}</mat-icon>
+  </div>
+</div>
