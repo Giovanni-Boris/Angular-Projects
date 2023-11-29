@@ -3,6 +3,7 @@ using Ecommerce.Exeptions;
 using Ecommerce.Interfaces;
 using Ecommerce.models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce.Services
 {
@@ -39,7 +40,17 @@ namespace Ecommerce.Services
             if (user == null) throw new NotFoundException("User not found");
             return Mapper(user);
         }
-
+        public async Task<List<UserResponse>> getAllUsers()
+        {
+            var users = await _userManager.Users.ToListAsync();
+            var userResponses = new List<UserResponse>();
+        
+            foreach (var user in users)
+            {
+                userResponses.Add(Mapper(user));
+            }
+            return userResponses;
+        }
         private UserResponse Mapper(User user)
         {
             return new UserResponse()
