@@ -16,21 +16,18 @@ namespace Ecommerce.Controllers
         {
             _userService = userService;
         }
-        /*[HttpGet]
-        public async Task<IActionResult> getUser()
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> getUser(string userId)
         {
-           
-        }*/
+            return Ok(await _userService.getUser(userId));
+        }
 
-        [HttpPut("updateUser/{userId}")]
+        [HttpPut("{userId}")]
         [ModelValidationAttribute]
         [Authorize(Policy = IdentityData.AdminUserPolicyName)]
         public async Task<IActionResult> UpdateUser([FromRoute] string userId, [FromBody] UserRequest model)
         {
-            if (_userService == null) ;
-            return Ok(await  _userService.UpdateUser(userId, model));
-  
-          
+            return Ok(await _userService.UpdateUser(userId, model)); 
         }
     }
 }
