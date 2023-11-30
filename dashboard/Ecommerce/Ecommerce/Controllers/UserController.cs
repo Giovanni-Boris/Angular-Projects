@@ -21,13 +21,24 @@ namespace Ecommerce.Controllers
         {
             return Ok(await _userService.getUser(userId));
         }
-
+        [HttpGet("all")]
+        public async Task<IActionResult> getAllUsers()
+        {
+            return Ok(await _userService.getAllUsers());
+        }
         [HttpPut("{userId}")]
         [ModelValidationAttribute]
         [Authorize(Policy = IdentityData.AdminUserPolicyName)]
         public async Task<IActionResult> UpdateUser([FromRoute] string userId, [FromBody] UserRequest model)
         {
-            return Ok(await _userService.UpdateUser(userId, model)); 
+            return Ok(await _userService.UpdateUser(userId, model));
+        }
+        [HttpDelete("{userId}")]
+        [ModelValidationAttribute]
+        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
+        public async Task<IActionResult> DeleteUser([FromRoute] string userId)
+        {
+            return Ok(await _userService.removeUser(userId)); 
         }
     }
 }

@@ -3,6 +3,7 @@ using Ecommerce.Exeptions;
 using Ecommerce.Interfaces;
 using Ecommerce.models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce.Services
@@ -40,6 +41,14 @@ namespace Ecommerce.Services
             if (user == null) throw new NotFoundException("User not found");
             return Mapper(user);
         }
+        public async Task<IActionResult> removeUser(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+                return new NotFoundObjectResult($"User with id: {userId} not found");
+            await _userManager.DeleteAsync(user);
+            return new NoContentResult();
+        }   
         public async Task<List<UserResponse>> getAllUsers()
         {
             var users = await _userManager.Users.ToListAsync();
