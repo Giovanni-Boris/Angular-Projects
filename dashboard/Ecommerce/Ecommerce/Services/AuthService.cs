@@ -34,9 +34,9 @@ namespace Ecommerce.Services
                 Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = model.Username,
-                Img = model.Img,
-                Status = model.Status,
-                Age = model.Age
+                Img = model.Img ?? "",
+                Status = model.Status ?? 1,
+                Age = model.Age ?? 20
 
             };
 

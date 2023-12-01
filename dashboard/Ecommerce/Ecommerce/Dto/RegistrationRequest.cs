@@ -6,10 +6,10 @@ namespace Ecommerce.Dto
     {
         [Required(ErrorMessage = "User Name is required")]
         public string Username { get; set; }
-        public string Img { get; set; }
-        public int Status { get; set; }
+        public string? Img { get; set; }
+        public int? Status { get; set; }
 
-        public int Age { get; set; }
+        public int? Age { get; set; }
 
         public bool isAdmin { get; set; }
 
