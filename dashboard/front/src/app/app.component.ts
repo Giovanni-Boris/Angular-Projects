@@ -5,6 +5,7 @@ import { NavbarComponent } from './modules/shared/components/navbar/navbar.compo
 import { SidebarComponent } from './modules/shared/components/sidebar/sidebar.component';
 import { Store } from '@ngrx/store';
 import { selectThemeMode } from './modules/store/theme/theme.selectors';
+import { selectIsLogged } from './modules/store/user/user.selectors';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ import { selectThemeMode } from './modules/store/theme/theme.selectors';
 })
 export class AppComponent {
   title = 'front';
-  private store: Store = inject(Store);
+  private readonly store: Store = inject(Store);
+  isLoggedIn$ = this.store.select(selectIsLogged)
   darkMode$ = this.store.select(selectThemeMode);
 }

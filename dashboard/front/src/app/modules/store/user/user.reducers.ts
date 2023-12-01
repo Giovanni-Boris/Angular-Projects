@@ -10,7 +10,7 @@ import {
 import { initialState } from '../theme/theme.state';
 
 
-export const authReducer = createReducer(
+export const userReducer = createReducer(
   initialState,
   on(login, (state) => ({ ...state, isFetching: true })),
   on(loginSuccess, (state, { token }) => ({
