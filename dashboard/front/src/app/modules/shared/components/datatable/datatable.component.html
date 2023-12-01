@@ -70,7 +70,7 @@
         <th mat-header-cell *matHeaderCellDef>Action</th>
         <td mat-cell *matCellDef="let element">
           <div class="cellAction">
-          <a routerLink="/users/test">
+          <a [routerLink]="['/users', element.id]">
             <div class="viewButton">View</div>
           </a>
           <div

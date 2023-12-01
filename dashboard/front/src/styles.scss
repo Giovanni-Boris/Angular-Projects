@@ -5,3 +5,98 @@ a {
   text-decoration: none;
   color: inherit;
 }
+.app.dark {
+  background-color: #111;
+  color: rgb(156, 156, 156);
+
+   text {
+    color: rgb(156, 156, 156) !important;
+  }
+
+  .table {
+    background-color: #111;
+    .mat-mdc-header-cell{
+      color: gray ;
+    }
+    .mdc-data-table__cell {
+      color: gray ;
+    }
+  }
+
+  .navbar {
+    color: #999 !important;
+    border-color: #333 !important;
+    
+    .search {
+      border-color: gray !important;
+    }
+  }
+
+  .sidebar {
+    background-color: #111 !important;
+    border-color: #333 !important;
+    .top {
+      .logo {
+        color: #999 !important;
+      }
+    }
+    hr {
+      border-color: #333;
+    }
+
+    ul {
+      li {
+        &:hover {
+          background-color: #333;
+        }
+
+        .icon {
+          color: #999 !important;
+        }
+      }
+    }
+  }
+  .chart {
+    text {
+      color: gray !important;
+    }
+    .ng-star-inserted{
+      color:red;
+    }
+  }
+  .datatable {
+    .datagrid {
+      background-color: #111;
+      border: none;
+      .mdc-checkbox__native-control{
+        border-color: gray !important;
+      }
+      .mat-mdc-header-cell{
+        color: gray;
+      }
+      .mat-mdc-cell{
+        color: gray;
+      }
+      .viewButton,
+      .deleteButton,
+      .cellWithStatus {
+        color: gray;
+        border: none;
+      }
+    }
+  }
+  .mat-mdc-paginator{
+    background-color: #111;
+    color: gray;
+    span {
+      color: gray;
+    }
+    svg {
+      color: gray;
+    }
+  }
+
+  input{
+      background-color: transparent;
+  }
+}

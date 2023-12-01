@@ -4,11 +4,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { routes } from './app.routes';
 import { provideStore } from '@ngrx/store';
+import { themeReducer } from './modules/store/theme/theme.reducers';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     importProvidersFrom([BrowserAnimationsModule]),
     provideRouter(routes, withHashLocation()),
-    provideStore(),
+    provideStore({ theme: themeReducer }),
   ],
 };

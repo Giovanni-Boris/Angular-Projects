@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
@@ -10,6 +10,8 @@ import { Color, ScaleType } from '@swimlane/ngx-charts';
   styleUrl: './chart.component.scss',
 })
 export class ChartComponent {
+  @Input()
+  title:string = "";
   view: [number, number] = [730, 250];
   colorScheme: Color = {
     domain: ['#99CCE5', '#FF7F7F'],

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { WidgetsComponent } from '../../components/widgets/widgets.component';
 import { FeaturedComponent } from '../../components/featured/featured.component';
 import { ChartComponent } from '../../../shared/components/chart/chart.component';
-import { TableComponent } from '../../components/table/table.component';
+import { TableComponent } from '../../../shared/components/table/table.component';
 
 @Component({
   selector: 'app-home-page',

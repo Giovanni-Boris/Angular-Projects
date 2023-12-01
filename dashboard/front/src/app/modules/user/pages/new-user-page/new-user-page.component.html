@@ -1,0 +1,42 @@
+<div class="top">
+  <h1>{{ title }}</h1>
+</div>
+<div class="bottom">
+  <div class="left">
+    <img
+      [src]="
+        file
+          ? fileUrl
+          : 'https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg'
+      "
+      alt=""
+    />
+  </div>
+  <div class="right">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="formInput">
+        <label htmlFor="file">
+          Image: <mat-icon>cloud_upload</mat-icon>
+          <input
+            type="file"
+            id="file"
+            (change)="handleFileInput($event)"
+            style="display: none"
+          />
+        </label>
+      </div>
+
+      @for (item of formFields; track $index) {
+      <div class="formInput">
+        <label>{{ item.label }}</label>
+        <input
+          [type]="item.type"
+          [placeholder]="item.placeholder"
+          [formControlName]="item.label"
+        />
+      </div>
+      }
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</div>

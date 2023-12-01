@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { Store } from '@ngrx/store';
+import { toggleTheme } from '../../../store/theme/theme.actions';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -9,5 +11,8 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
-  toggleDarkMode(){}
+  private store: Store = inject(Store);
+  toggleDarkMode() {7
+    this.store.dispatch(toggleTheme());
+  }
 }
