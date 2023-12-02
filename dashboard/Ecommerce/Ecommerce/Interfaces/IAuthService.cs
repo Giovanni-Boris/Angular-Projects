@@ -6,7 +6,7 @@ namespace Ecommerce.Interfaces
 {
     public interface IAuthService
     {
-        Task< string> Registeration(RegistrationRequest model, string role);
+        Task< string> Register(RegistrationRequest model, string role);
         Task<LoginResponse> Login(LoginRequest model);
     }
 }

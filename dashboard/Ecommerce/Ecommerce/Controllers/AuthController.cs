@@ -27,10 +27,10 @@ namespace Ecommerce.Controllers
         }
 
         [HttpPost]
-        [Route("registeration")]
+        [Route("register")]
         public async Task<IActionResult> Register(RegistrationRequest model)
         {
-            return CreatedAtAction(nameof(Register), await _authService.Registeration(model, model.isAdmin ? UserRoles.Admin : UserRoles.User));
+            return CreatedAtAction(nameof(Register), await _authService.Register(model, model.isAdmin ? UserRoles.Admin : UserRoles.User));
         }
 
     }

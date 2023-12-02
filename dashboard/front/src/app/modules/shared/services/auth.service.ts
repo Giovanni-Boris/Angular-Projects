@@ -7,22 +7,29 @@ import { Token } from '../interfaces/token.model';
 @Injectable({
   providedIn: 'root',
 })
-
 export class AuthService {
-
   constructor(private http: HttpClient) {}
 
-  login(credentials: { Username: string, Password: string }): Observable<Token> {
-    return this.http.post<Token>( Global.API_URL+'Auth/login', credentials);
-  }
-  register( registerCredentials: { name: string, email: string, password:string} ) : Observable<{token:string}> {
+  login(credentials: {
+    Username: string;
+    Password: string;
+  }): Observable<Token> {
     return this.http
-      .post<{ token: string}>( Global.API_URL+'auth/register', registerCredentials)
-      .pipe(
-        tap(data=>console.log("Token  ", data)),
-        catchError(this.handleError)
+      .post<Token>(Global.API_URL + 'Auth/login', credentials)
+      .pipe(catchError(this.handleError));
+  }
+  register(registerCredentials: {
+    Username: string;
+    Email: string;
+    Password: string;
+  }): Observable<string> {
+    return this.http
+      .post(
+        Global.API_URL + 'Auth/register',
+        registerCredentials,
+        { responseType: 'text' }
       )
-    ;
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(err: HttpErrorResponse): Observable<never> {

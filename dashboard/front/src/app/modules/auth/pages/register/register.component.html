@@ -1,46 +1,75 @@
-<div class="box-form">
-  <div class="left">
-    <div class="overlay">
-      <h1>Hello World.</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et
-        est sed felis aliquet sollicitudin
-      </p>
-      <span>
-        <p>login with social media</p>
-        <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-        <a href="#"
-          ><i class="fa fa-twitter" aria-hidden="true"></i> Login with
-          Twitter</a
+<div class="body">
+  <div class="box-form">
+    <div class="left">
+      <div class="overlay">
+        <h1>Dashboard app</h1>
+        <p>These app was created by using ANGULAR 17 and ASP .NET</p>
+        <span>
+          <p>login with social media</p>
+          <a href="#"
+            ><i class="fa fa-twitter" aria-hidden="true"></i> Register</a
+          >
+        </span>
+      </div>
+    </div>
+
+    <div class="right">
+      <h5>Register</h5>
+      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+        <input type="text" placeholder="username" formControlName="Username" />
+        <br />
+        <div
+          *ngIf="registrationForm.get('Username')?.hasError('required')"
+          class="error-message"
         >
-      </span>
+          Username is required
+        </div>
+        <input type="email" placeholder="Email" formControlName="Email" />
+        <br />
+        <div
+          *ngIf="registrationForm.get('Email')?.hasError('required')"
+          class="error-message"
+        >
+          Email is required
+        </div>
+        <div
+          *ngIf="registrationForm.get('Email')?.hasError('email')"
+          class="error-message"
+        >
+          Invalid email format
+        </div>
+
+        <input
+          type="password"
+          placeholder="password"
+          formControlName="Password"
+        />
+        <br />
+        <div
+          *ngIf="registrationForm.get('Password')?.hasError('required')"
+          class="error-message"
+        >
+          Password is required
+        </div>
+
+        <input
+          type="password"
+          placeholder="confirm password"
+          formControlName="ConfirmPassword"
+        />
+        <br />
+        <div
+          *ngIf="registrationForm.hasError('mismatch')"
+          class="error-message"
+        >
+          Passwords do not match
+        </div>
+
+        <button type="submit" [disabled]="registrationForm.invalid">
+          Register
+        </button>
+        <button type="button" routerLink="/auth/login">Login</button>
+      </form>
     </div>
-  </div>
-
-  <div class="right">
-    <h5>Login</h5>
-    <p>
-      Don't have an account? <a href="#">Creat Your Account</a> it takes less
-      than a minute
-    </p>
-    <div class="inputs">
-      <input type="text" placeholder="user name" />
-      <br />
-      <input type="password" placeholder="password" />
-    </div>
-
-    <br /><br />
-
-    <div class="remember-me--forget-password">
-      <!-- Angular -->
-      <label>
-        <input type="checkbox" name="item" checked />
-        <span class="text-checkbox">Remember me</span>
-      </label>
-      <p>forget password?</p>
-    </div>
-
-    <br />
-    <button>Login</button>
   </div>
 </div>

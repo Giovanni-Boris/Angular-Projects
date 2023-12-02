@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { login } from '../../../store/user/user.actions';
+import { getUserData, login } from '../../../store/user/user.actions';
 import { Subject, takeUntil } from 'rxjs';
 import { selectToken } from '../../../store/user/user.selectors';
 
@@ -19,14 +19,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   password: string = '';
   private ngDestroyed$  = new Subject<void>();
   private readonly store: Store = inject(Store);
+  private readonly router: Router = inject(Router);
   ngOnInit(): void {
     this.store.select(selectToken)
     .pipe(takeUntil(this.ngDestroyed$))
     .subscribe((val)=>{
       if(val) {
-        //this.store.dispatch(getUserData({ id: val.id}));
-        //this.router.navigate(["/"])
-        console.log(val)
+        this.store.dispatch(getUserData({ id: val.id}));
+        this.router.navigate(["/"])
       };
     })
   }

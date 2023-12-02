@@ -23,7 +23,7 @@ namespace Ecommerce.Services
             _configuration = configuration;
 
         }
-        public async Task<string> Registeration(RegistrationRequest model, string role)
+        public async Task<string> Register(RegistrationRequest model, string role)
         {
             var userExists = await userManager.FindByNameAsync(model.Username);
             if (userExists != null)

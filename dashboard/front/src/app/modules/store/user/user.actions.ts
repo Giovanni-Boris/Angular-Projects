@@ -18,7 +18,7 @@ export const loginFailure = createAction(
 
 export const getUserData = createAction(
   '[User] Get User Data',
-  props<{ id: number }>()
+  props<{ id: string }>()
 );
 export const getUserDataSuccess = createAction(
   '[User] Get User Data Success',
