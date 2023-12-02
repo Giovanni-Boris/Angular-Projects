@@ -5,7 +5,7 @@ import { User } from '../../shared/interfaces/user.model';
 
 export const login = createAction(
   '[User] Login',
-  props<{ email: string; password: string }>()
+  props<{ Username: string; Password: string }>()
 );
 export const loginSuccess = createAction(
   '[User] Login Success',

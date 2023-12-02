@@ -70,9 +70,8 @@ namespace Ecommerce
                 app.UseSwaggerUI();
             }
             app.UseMiddleware<ExceptionMiddleware>();
-
-            app.UseHttpsRedirection();
             app.UseCors("Open");
+            app.UseHttpsRedirection();
             // Authentication & Authorization
             app.UseAuthentication();
             app.UseAuthorization();
