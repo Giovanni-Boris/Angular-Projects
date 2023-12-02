@@ -15,7 +15,6 @@ import { selectIsLogged } from './modules/store/user/user.selectors';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'front';
   private readonly store: Store = inject(Store);
   isLoggedIn$ = this.store.select(selectIsLogged)
   darkMode$ = this.store.select(selectThemeMode);

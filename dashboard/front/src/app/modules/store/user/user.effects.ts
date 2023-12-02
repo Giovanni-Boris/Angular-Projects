@@ -4,12 +4,14 @@ import { catchError, debounceTime, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as UserActions from './user.actions';
 import { AuthService } from '../../shared/services/auth.service';
+import { UserService } from '../../shared/services/user.service';
 
 @Injectable()
 export class UserEffects {
   constructor(
     private actions$: Actions,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService
   ) {}
   login$ = createEffect(() =>
     this.actions$.pipe(
@@ -23,18 +25,18 @@ export class UserEffects {
       )
     )
   );
-/*
+
   getUserData$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AuthActions.getUserData),
+      ofType(UserActions.getUserData),
       switchMap(({ id }) =>
-        this.userService.getUser(id).pipe(
-          map((user) => AuthActions.getUserDataSuccess({ user })),
-          catchError((error) => of(AuthActions.getUserDataFailure({ error })))
+        this.userService.getUserData(id).pipe(
+          map((user) => UserActions.getUserDataSuccess({ user })),
+          catchError((error) => of(UserActions.getUserDataFailure({ error })))
         )
       )
     )
-  );*/
+  );
 
  
   
