@@ -11,12 +11,12 @@ export interface UserState {
 export const initialState: UserState = {
   token: undefined,
   user: {
-    Id: '',
-    Username: '',
-    Img: '',
-    Status: 0,
-    Age: 0,
-    Email: '',
+    id: '',
+    username: '',
+    img: '',
+    status: 0,
+    age: 0,
+    email: '',
   },
   isFetching: false,
   error: "",

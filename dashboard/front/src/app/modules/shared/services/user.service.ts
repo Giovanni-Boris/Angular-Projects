@@ -9,8 +9,7 @@ import { User } from '../interfaces/user.model';
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   getUserData(id: string): Observable<User> {
     if (id === '') return throwError(() => 'Cannot be an empty string');
@@ -18,6 +17,13 @@ export class UserService {
       .get<User>(Global.API_URL + 'users/' + id, {})
       .pipe(catchError(this.handleError));
   }
+
+  getAllUserData(): Observable<User[]> {
+    return this.http
+      .get<User[]>(Global.API_URL + 'users/all', {})
+      .pipe(catchError(this.handleError));
+  }
+
 
   private handleError(err: HttpErrorResponse): Observable<never> {
     return throwError(() => err);

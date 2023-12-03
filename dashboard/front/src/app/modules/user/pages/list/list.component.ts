@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DatatableComponent } from '../../../shared/components/datatable/datatable.component';
+import { DatatableComponent } from '../../components/datatable/datatable.component';
+import { UserService } from '../../../shared/services/user.service';
+import { Subject } from 'rxjs';
+import { User } from '../../../shared/interfaces/user.model';
 
 @Component({
   selector: 'app-list',
@@ -10,5 +13,6 @@ import { DatatableComponent } from '../../../shared/components/datatable/datatab
   styleUrl: './list.component.scss'
 })
 export class ListComponent {
-
+  private userService  = inject(UserService);
+  users$ = this.userService.getAllUserData();
 }
