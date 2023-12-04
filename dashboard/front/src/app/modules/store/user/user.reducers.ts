@@ -6,6 +6,7 @@ import {
   getUserData,
   getUserDataSuccess,
   getUserDataFailure,
+  logout,
 } from './user.actions';
 import { initialState } from '../theme/theme.state';
 
@@ -31,5 +32,6 @@ export const userReducer = createReducer(
     ...state,
     error,
     isFetching: false
-  }))
+  })),
+  on(logout, () => initialState)
 );

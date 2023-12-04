@@ -1,37 +1,52 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
-const formFields = [
-    { id: 1, label: 'Username', type: 'text', placeholder: 'john_doe' },
-    { id: 2, label: 'Name and surname', type: 'text', placeholder: 'John Doe' },
-    { id: 3, label: 'Email', type: 'mail', placeholder: 'john_doe@gmail.com' },
-    { id: 4, label: 'Phone', type: 'text', placeholder: '+1 234 567 89' },
-    { id: 5, label: 'Password', type: 'password' },
-    { id: 6, label: 'Address', type: 'text', placeholder: 'Elton St. 216 NewYork' },
-    { id: 7, label: 'Country', type: 'text', placeholder: 'USA' },
-  ];
+import { FileService } from '../../../shared/services/file.service';
+import { Subject, concatMap, takeUntil } from 'rxjs';
+import { AuthService } from '../../../shared/services/auth.service';
+
 @Component({
   selector: 'app-new-user-page',
   standalone: true,
   imports: [CommonModule, MatIconModule, ReactiveFormsModule],
   templateUrl: './new-user-page.component.html',
-  styleUrl: './new-user-page.component.scss'
+  styleUrl: './new-user-page.component.scss',
 })
-export class NewUserPageComponent {
-  private formBuilder: FormBuilder = inject(FormBuilder);
-  readonly formFields = formFields;
-  readonly title ="Add New User";
-  userForm: FormGroup;
-  constructor(){
-    const formControls: { [key: string]: any } = {};
-    this.formFields.forEach((field) => {
-      formControls[field.label] = [null, Validators.required];
+export class NewUserPageComponent implements OnDestroy {
+  userForm!: FormGroup;
+  ngDestroy$ = new Subject<void>();
+  constructor(
+    private fb: FormBuilder,
+    private fileService: FileService,
+    private authService: AuthService
+  ) {}
+
+  ngOnInit(): void {
+    this.userForm = this.fb.group({
+      Username: ['', Validators.required],
+      Password: ['', [Validators.required, this.passwordValidator]],
+      Status: [1, Validators.required],
+      Age: ['', [Validators.required, Validators.min(1)]],
+      Email: ['', [Validators.required, Validators.email]],
     });
-    this.userForm = this.formBuilder.group(formControls);
   }
-  file : File | null = null;
+  private passwordValidator(control: { value: string }) {
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d])[\w\W]{5,}$/;
+    if (control.value && !passwordRegex.test(control.value)) {
+      return { invalidPassword: true };
+    }
+
+    return null;
+  }
+  file: File | null = null;
   fileUrl: string = '';
 
   handleFileInput(event: Event) {
@@ -42,7 +57,31 @@ export class NewUserPageComponent {
       this.fileUrl = URL.createObjectURL(this.file);
     }
   }
-  onSubmit(){
-    console.log(this.userForm);
+  onSubmit() {
+    if (!this.file) window.alert('Add some image');
+    if (!this.file || !this.userForm.valid) return;
+    console.log(this.userForm.value);
+    this.fileService
+      .uploadSignature(this.file)
+      .pipe(
+        concatMap((cloudinaryImage) =>
+          this.authService.register({
+            ...this.userForm.value,
+            Img: cloudinaryImage.secure_url,
+          })
+        ),
+        takeUntil(this.ngDestroy$)
+      )
+      .subscribe({
+        next: (val) => console.log(val),
+        error: (err) => {
+          if(err?.error)
+            window.alert(JSON.parse(err.error).Message)
+        },
+      });
+  }
+  ngOnDestroy(): void {
+    this.ngDestroy$.next();
+    this.ngDestroy$.complete();
   }
 }

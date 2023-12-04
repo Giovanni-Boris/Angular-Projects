@@ -12,7 +12,10 @@ export const selectIsFecthing = createSelector(
   authFeature,
   (state) => state.isFetching ,
 );
-
+export const selectIsError = createSelector(
+  authFeature,
+  (state) => state.error ,
+);
 export const selectTokenId = createSelector(
   authFeature,
   (state) => state.token?.id,

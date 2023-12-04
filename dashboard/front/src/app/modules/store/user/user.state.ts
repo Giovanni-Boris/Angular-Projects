@@ -5,7 +5,7 @@ export interface UserState {
   token: Token | undefined;
   user: User;
   isFetching: boolean;
-  error: string;
+  error: any;
 }
 
 export const initialState: UserState = {

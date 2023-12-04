@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import { Global } from '../constants/global';
 import { Token } from '../interfaces/token.model';
+import { UserUpload } from '../interfaces/userUpload';
 
 @Injectable({
   providedIn: 'root',
@@ -18,15 +19,12 @@ export class AuthService {
       .post<Token>(Global.API_URL + 'Auth/login', credentials)
       .pipe(catchError(this.handleError));
   }
-  register(registerCredentials: {
-    Username: string;
-    Email: string;
-    Password: string;
-  }): Observable<string> {
+  register(registerCredentials: UserUpload): Observable<string> {
+    console.log(registerCredentials)
     return this.http
       .post(
         Global.API_URL + 'Auth/register',
-        registerCredentials,
+        { ...registerCredentials, isAdmin: true },
         { responseType: 'text' }
       )
       .pipe(catchError(this.handleError));

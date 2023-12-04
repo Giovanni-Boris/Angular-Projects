@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { getUserData, login } from '../../../store/user/user.actions';
 import { Subject, concat, filter, takeUntil } from 'rxjs';
 import {
+  selectIsError,
   selectToken,
   selectUserData,
 } from '../../../store/user/user.selectors';
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   private ngDestroyed$ = new Subject<void>();
   private readonly store: Store = inject(Store);
   private readonly router: Router = inject(Router);
+  error$ = this.store.select(selectIsError);
   ngOnInit(): void {
     this.store
       .select(selectToken)
@@ -31,6 +33,14 @@ export class LoginComponent implements OnInit, OnDestroy {
         if (token) {
           this.store.dispatch(getUserData({ id: token.id }));
           this.router.navigate(['/']);
+        }
+      });
+    this.store
+      .select(selectIsError)
+      .pipe(takeUntil(this.ngDestroyed$))
+      .subscribe((error) => {
+        if (error) {
+          window.alert(error?.error?.Message)
         }
       });
   }

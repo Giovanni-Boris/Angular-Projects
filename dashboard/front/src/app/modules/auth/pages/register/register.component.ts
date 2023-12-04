@@ -29,13 +29,20 @@ export class RegisterComponent implements OnInit, OnDestroy {
       {
         Username: ['', Validators.required],
         Email: ['', [Validators.required, Validators.email]],
-        Password: ['', Validators.required],
+        Password: ['', Validators.required,  this.passwordValidator ],
         ConfirmPassword: ['', Validators.required],
       },
       { validators: this.passwordMatchValidator }
     );
   }
+  private passwordValidator(control: { value: string; }) {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d])[\w\W]{5,}$/;
+    if (control.value && !passwordRegex.test(control.value)) {
+      return { invalidPassword: true };
+    }
 
+    return null;
+  }
   passwordMatchValidator(g: FormGroup) {
     return g.get('Password')?.value === g.get('ConfirmPassword')?.value
       ? null

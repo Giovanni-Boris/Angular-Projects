@@ -4,24 +4,36 @@
     <h1 class="title">Information</h1>
     <div class="item">
       <img
-        src="https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+        [src]="
+          actualUser && actualUser.img
+            ? actualUser.img
+            : 'assets/person/noAvatar.png'
+        "
         alt=""
         class="itemImg"
       />
       <div class="details">
-        <h1 class="itemTitle">Jane Doe</h1>
+        <h1 class="itemTitle">{{ actualUser?.username }}</h1>
         <div class="detailItem">
           <span class="itemKey">Email:</span>
-          <span class="itemValue">janedo&#64;gmail.com</span>
+          <span class="itemValue">{{ actualUser?.email }}</span>
         </div>
         <div class="detailItem">
-          <span class="itemKey">Phone:</span>
-          <span class="itemValue">+1 2345 67 89</span>
+          <span class="itemKey">Age:</span>
+          <span class="itemValue">{{ actualUser?.age }}</span>
         </div>
         <div class="detailItem">
           <span class="itemKey">Address:</span>
-          <span class="itemValue">
-            Elton St. 234 Garden Yd. NewYork
+          <span class="itemValue"> Elton St. 234 Garden Yd. NewYork </span>
+        </div>
+        <div class="detailItem">
+          <span class="itemKey">Status</span>
+          <span
+            [class]="
+              'itemValue ' + (actualUser?.status === 1 ? 'active' : 'pending')
+            "
+          >
+            {{ actualUser?.status === 1 ? "active" : "pending" }}
           </span>
         </div>
         <div class="detailItem">
@@ -36,6 +48,6 @@
   </div>
 </div>
 <div class="bottom">
-<h1 class="title">Last Transactions</h1>
-  <app-table/>
+  <h1 class="title">Last Transactions</h1>
+  <app-table />
 </div>

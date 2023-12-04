@@ -33,7 +33,11 @@
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>Id</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.id.length > 5 ? element.id.substring(0, 5) + '...' : element.id }}
+          {{
+            element.id.length > 5
+              ? element.id.substring(0, 5) + "..."
+              : element.id
+          }}
         </td>
       </ng-container>
 
@@ -46,7 +50,11 @@
         <th mat-header-cell *matHeaderCellDef>Img</th>
         <td mat-cell *matCellDef="let element">
           <div class="cellWithImg">
-            <img class="cellImg" [src]="element.img" alt="avatar" />
+            <img
+              class="cellImg"
+              [src]="element.img ? element.img : 'assets/person/noAvatar.png'"
+              alt="avatar"
+            />
             {{ element.username }}
           </div>
         </td></ng-container
@@ -55,8 +63,12 @@
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef>Status</th>
         <td mat-cell *matCellDef="let element">
-          <div [class]="'cellWithStatus ' + (element.status==1 ?  'active': 'pending')">
-            {{ element.status==1 ?  'active': 'pending' }}
+          <div
+            [class]="
+              'cellWithStatus ' + (element.status == 1 ? 'active' : 'pending')
+            "
+          >
+            {{ element.status == 1 ? "active" : "pending" }}
           </div>
         </td>
       </ng-container>
@@ -72,17 +84,17 @@
         <th mat-header-cell *matHeaderCellDef>Action</th>
         <td mat-cell *matCellDef="let element">
           <div class="cellAction">
-          <a [routerLink]="['/users', element.id]">
-            <div class="viewButton">View</div>
-          </a>
-          <div
-            class="deleteButton"
-            (click)="$event.stopPropagation();handleDelete(element)"
-          >
-            Delete
+            <a [routerLink]="['/users', element.id]">
+              <div class="viewButton">View</div>
+            </a>
+            <div
+              class="deleteButton"
+              (click)="$event.stopPropagation(); handleDelete(element)"
+            >
+              Delete
+            </div>
           </div>
-        </div>
-      </td>
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

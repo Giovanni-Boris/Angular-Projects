@@ -12,6 +12,8 @@ export function persistStateReducer(_reducer: ActionReducer<UserState>) {
     const nextState = _reducer(state, action);
     if(action.type=="[User] Get User Data Success")
       sessionStorage.setItem(sessionStorageKey, JSON.stringify(nextState));
+    else if(action.type=="[User] Logout")
+      sessionStorage.removeItem(sessionStorageKey);
     return nextState;
   };
 }

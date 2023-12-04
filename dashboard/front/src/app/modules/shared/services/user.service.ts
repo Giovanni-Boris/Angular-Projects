@@ -24,6 +24,12 @@ export class UserService {
       .pipe(catchError(this.handleError));
   }
 
+  deleteUserData(id: string): Observable<any> {
+    if (id === '') return throwError(() => 'Cannot be an empty string');
+    return this.http
+      .delete<any>(Global.API_URL + 'users/' + id)
+      .pipe(catchError(this.handleError));
+  }
 
   private handleError(err: HttpErrorResponse): Observable<never> {
     return throwError(() => err);
