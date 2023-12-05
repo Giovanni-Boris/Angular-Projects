@@ -1,0 +1,33 @@
+<div class="form">
+  <h1 style="text-align: center;">Create Order</h1>
+  <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" formControlName="Amount" />
+
+    <label for="method">Method:</label>
+    <input type="text" id="method" formControlName="Method" />
+
+    <label for="status">Status:</label>
+    <select id="status" formControlName="Status">
+      <option *ngFor="let status of statusOptions" [value]="status">
+        {{ status }}
+      </option>
+    </select>
+
+    <label for="productId">Product:</label>
+    <select id="productId" formControlName="productId">
+      <option *ngFor="let product of productOptions" [value]="product.id">
+        {{ product.productName }}
+      </option>
+    </select>
+
+    <label for="userId">User:</label>
+    <select id="userId" formControlName="userId">
+      <option *ngFor="let user of userOptions" [value]="user.id">
+        {{ user.username }}
+      </option>
+    </select>
+
+    <button type="submit">Submit</button>
+  </form>
+</div>
