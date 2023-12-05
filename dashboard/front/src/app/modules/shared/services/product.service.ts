@@ -15,6 +15,17 @@ export class ProductService {
       .get<Product[]>(Global.API_URL + 'products', {})
       .pipe(catchError(this.handleError));
   }
+  createProduct(product: {
+    ProductName: string;
+    Description: string;
+    Price: number;
+    StockQuantity: number;
+    Img: string;
+  }): Observable<string> {
+    return this.http
+      .post(Global.API_URL + 'products', product, { responseType: 'text' })
+      .pipe(catchError(this.handleError));
+  }
   private handleError(err: HttpErrorResponse): Observable<never> {
     return throwError(() => err);
   }

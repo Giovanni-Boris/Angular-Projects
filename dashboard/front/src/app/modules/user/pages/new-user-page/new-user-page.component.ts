@@ -11,6 +11,7 @@ import {
 import { FileService } from '../../../shared/services/file.service';
 import { Subject, concatMap, takeUntil } from 'rxjs';
 import { AuthService } from '../../../shared/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-user-page',
@@ -25,7 +26,8 @@ export class NewUserPageComponent implements OnDestroy {
   constructor(
     private fb: FormBuilder,
     private fileService: FileService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -73,7 +75,7 @@ export class NewUserPageComponent implements OnDestroy {
         takeUntil(this.ngDestroy$)
       )
       .subscribe({
-        next: (val) => console.log(val),
+        next: () => this.router.navigate(["/users"]),
         error: (err) => {
           if(err?.error)
             window.alert(JSON.parse(err.error).Message)

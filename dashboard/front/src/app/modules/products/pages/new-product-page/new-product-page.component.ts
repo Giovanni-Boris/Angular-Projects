@@ -11,6 +11,8 @@ import {
 import { Subject, concatMap, takeUntil } from 'rxjs';
 import { AuthService } from '../../../shared/services/auth.service';
 import { FileService } from '../../../shared/services/file.service';
+import { ProductService } from '../../../shared/services/product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-product-page',
@@ -25,27 +27,19 @@ export class NewProductPageComponent implements OnDestroy {
   constructor(
     private fb: FormBuilder,
     private fileService: FileService,
-    private authService: AuthService
+    private productService: ProductService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
-      Username: ['', Validators.required],
-      Password: ['', [Validators.required, this.passwordValidator]],
-      Status: [1, Validators.required],
-      Age: ['', [Validators.required, Validators.min(1)]],
-      Email: ['', [Validators.required, Validators.email]],
+      ProductName: ['', Validators.required],
+      Description: ['', [Validators.required]],
+      Price: [0, Validators.required],
+      StockQuantity: [0, [Validators.required, Validators.min(1)]],
     });
   }
-  private passwordValidator(control: { value: string }) {
-    const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d])[\w\W]{5,}$/;
-    if (control.value && !passwordRegex.test(control.value)) {
-      return { invalidPassword: true };
-    }
-
-    return null;
-  }
+  
   file: File | null = null;
   fileUrl: string = '';
 
@@ -65,7 +59,7 @@ export class NewProductPageComponent implements OnDestroy {
       .uploadSignature(this.file)
       .pipe(
         concatMap((cloudinaryImage) =>
-          this.authService.register({
+          this.productService.createProduct({
             ...this.userForm.value,
             Img: cloudinaryImage.secure_url,
           })
@@ -73,7 +67,7 @@ export class NewProductPageComponent implements OnDestroy {
         takeUntil(this.ngDestroy$)
       )
       .subscribe({
-        next: (val) => console.log(val),
+        next: () => this.router.navigate(["/products"]),
         error: (err) => {
           if(err?.error)
             window.alert(JSON.parse(err.error).Message)
