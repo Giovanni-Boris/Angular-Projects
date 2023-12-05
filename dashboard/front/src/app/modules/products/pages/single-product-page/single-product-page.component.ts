@@ -1,20 +1,20 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ChartComponent } from '../../../shared/components/chart/chart.component';
-import { TableComponent } from '../../../shared/components/table/table.component';
-import { UserService } from '../../../shared/services/user.service';
 import { ActivatedRoute } from '@angular/router';
-import { User } from '../../../shared/interfaces/user.model';
 import { Observable, Subject, map, switchAll, switchMap, takeUntil } from 'rxjs';
-import { OrderService } from '../../../shared/services/order.service';
+import { TableComponent } from '../../../shared/components/table/table.component';
 import { Order } from '../../../shared/interfaces/order.model';
+import { User } from '../../../shared/interfaces/user.model';
+import { UserService } from '../../../shared/services/user.service';
+import { OrderService } from '../../../shared/services/order.service';
+import { ChartComponent } from '../../../shared/components/chart/chart.component';
 
 @Component({
-  selector: 'app-single-user-page',
+  selector: 'app-single-product-page',
   standalone: true,
   imports: [CommonModule, ChartComponent, TableComponent],
-  templateUrl: './single-user-page.component.html',
-  styleUrl: './single-user-page.component.scss',
+  templateUrl: './single-product-page.component.html',
+  styleUrl: './single-product-page.component.scss',
 })
 export class SingleUserPageComponent implements OnInit, OnDestroy {
   private userService = inject(UserService);

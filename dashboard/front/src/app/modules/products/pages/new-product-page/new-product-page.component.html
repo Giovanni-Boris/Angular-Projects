@@ -1,0 +1,84 @@
+<div class="top">
+  <h1>New User</h1>
+</div>
+<div class="bottom">
+  <div class="left">
+    <img
+      [src]="
+        file
+          ? fileUrl
+          : 'https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg'
+      "
+      alt=""
+    />
+  </div>
+  <div class="right">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="formInput">
+        <label htmlFor="file">
+          Image: <mat-icon class="icon">cloud_upload</mat-icon>
+          <input
+            type="file"
+            id="file"
+            (change)="handleFileInput($event)"
+            style="display: none"
+          />
+        </label>
+      </div>
+      <div class="formInput">
+        <label for="Username">Username:</label>
+        <input type="text" id="Username" formControlName="Username" />
+        <div class="error-message" *ngIf="userForm.get('Username')?.hasError('required')">
+          Username is required.
+        </div>
+      </div>
+
+      <div class="formInput">
+        <label for="Password">Password:</label>
+        <input type="Password" id="Password" formControlName="Password" />
+        <div class="error-message" *ngIf="userForm.get('Password')?.hasError('required')">
+          Password is required.
+        </div>
+        <div class="error-message" *ngIf="userForm.get('Password')?.hasError('invalidPassword')">
+          Password must have at least 1 uppercase, 1 lowercase, 1 number, and be
+          at least 5 characters long.
+        </div>
+      </div>
+
+      <div class="formInput">
+        <label for="Status">Status:</label>
+        <select id="Status" formControlName="Status">
+          <option value="1">Active</option>
+          <option value="2">Pending</option>
+        </select>
+        <div class="error-message" *ngIf="userForm.get('Status')?.hasError('required')">
+          Status is required.
+        </div>
+      </div>
+
+      <div class="formInput">
+        <label for="Age">Age:</label>
+        <input type="number" id="Age" formControlName="Age" />
+        <div class="error-message" *ngIf="userForm.get('Age')?.hasError('required')">
+          Age is required.
+        </div>
+        <div class="error-message" *ngIf="userForm.get('Age')?.hasError('min')">
+          Age must be greater than or equal to 1.
+        </div>
+      </div>
+
+      <div class="formInput">
+        <label for="Email">Email:</label>
+        <input type="Email" id="Email" formControlName="Email" />
+        <div class="error-message" *ngIf="userForm.get('Email')?.hasError('required')">
+          Email is required.
+        </div>
+        <div class="error-message" *ngIf="userForm.get('Email')?.hasError('Email')">
+          Invalid Email format.
+        </div>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>

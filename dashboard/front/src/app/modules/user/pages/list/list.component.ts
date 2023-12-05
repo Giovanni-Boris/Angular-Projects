@@ -39,5 +39,8 @@ export class ListComponent implements OnInit, OnDestroy {
         this.users = users.filter((el) => el.id !== this.userId);
       });
   }
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.ngDestroy$.next();
+    this.ngDestroy$.complete();
+  }
 }
