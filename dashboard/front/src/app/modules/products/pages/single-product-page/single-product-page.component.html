@@ -5,49 +5,35 @@
     <div class="item">
       <img
         [src]="
-          actualUser && actualUser.img
-            ? actualUser.img
+          _actualProduct && _actualProduct.img
+            ? _actualProduct.img
             : 'assets/person/noAvatar.png'
         "
         alt=""
         class="itemImg"
       />
       <div class="details">
-        <h1 class="itemTitle">{{ actualUser?.username }}</h1>
+        <h1 class="itemTitle">{{ _actualProduct?.productName }}</h1>
         <div class="detailItem">
-          <span class="itemKey">Email:</span>
-          <span class="itemValue">{{ actualUser?.email }}</span>
+          <span class="itemKey">Description:</span>
+          <span class="itemValue">{{ _actualProduct?.description }}</span>
         </div>
         <div class="detailItem">
-          <span class="itemKey">Age:</span>
-          <span class="itemValue">{{ actualUser?.age }}</span>
+          <span class="itemKey">Price:</span>
+          <span class="itemValue">{{ _actualProduct?.price }}</span>
         </div>
         <div class="detailItem">
-          <span class="itemKey">Address:</span>
-          <span class="itemValue"> Elton St. 234 Garden Yd. NewYork </span>
-        </div>
-        <div class="detailItem">
-          <span class="itemKey">Status</span>
-          <span
-            [class]="
-              'itemValue ' + (actualUser?.status === 1 ? 'active' : 'pending')
-            "
-          >
-            {{ actualUser?.status === 1 ? "active" : "pending" }}
-          </span>
-        </div>
-        <div class="detailItem">
-          <span class="itemKey">Country:</span>
-          <span class="itemValue">USA</span>
+          <span class="itemKey">StockQuantity:</span>
+          <span class="itemValue">{{ _actualProduct?.stockQuantity }}</span>
         </div>
       </div>
     </div>
   </div>
   <div class="right">
-    <app-chart title="User Spending ( Last 6 Months)" />
+    <app-chart title="Product Spending ( Last 6 Months)" />
   </div>
 </div>
 <div class="bottom">
   <h1 class="title">Last Transactions</h1>
-  <app-table [rows]="ordersUser$ ? (ordersUser$ | async) || [] : []" />
+  <app-table [rows]="ordersProduct$  ? (ordersProduct$  | async) || [] : []" />
 </div>

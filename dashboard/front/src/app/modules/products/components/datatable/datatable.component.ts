@@ -76,7 +76,7 @@ export class DatatableComponent {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
-      row.Id + 1
+      row.id + 1
     }`;
   }
 }

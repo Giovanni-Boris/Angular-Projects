@@ -1,10 +1,10 @@
 export interface Product{
-  Id: number;
-  ProductName: string;
-  Description: string;
-  Img: string;
-  Price: number;
-  StockQuantity: number;
-  CreatedAt: Date;
-  UpdatedAt?: Date;
+  id: number;
+  productName: string;
+  description: string;
+  img: string;
+  price: number;
+  stockQuantity: number;
+  createdAt: Date;
+  updatedAt?: Date;
 }

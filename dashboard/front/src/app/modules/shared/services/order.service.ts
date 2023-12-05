@@ -21,6 +21,12 @@ export class OrderService {
       .get<Order[]>(Global.API_URL + 'orders/user/'+id, {})
       .pipe(catchError(this.handleError));
   }
+  getOrdersProduct(id: number = -1): Observable<Order[]> {
+    if (id === -1) return throwError(() => 'Cannot be negative');
+    return this.http
+      .get<Order[]>(Global.API_URL + 'orders/product/'+id, {})
+      .pipe(catchError(this.handleError));
+  }
   private handleError(err: HttpErrorResponse): Observable<never> {
     return throwError(() => err);
   }

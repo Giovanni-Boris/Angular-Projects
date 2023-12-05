@@ -9,7 +9,12 @@ import { Product } from '../interfaces/product.model';
 })
 export class ProductService {
   constructor(private http: HttpClient) {}
-
+  getProductById(id: number = -1): Observable<Product> {
+    if (id === -1) return throwError(() => 'Cannot be negative');
+    return this.http
+      .get<Product>(Global.API_URL + 'products/' + id, {})
+      .pipe(catchError(this.handleError));
+  }
   getProducts(): Observable<Product[]> {
     return this.http
       .get<Product[]>(Global.API_URL + 'products', {})
