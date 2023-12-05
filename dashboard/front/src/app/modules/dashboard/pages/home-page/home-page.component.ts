@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WidgetsComponent } from '../../components/widgets/widgets.component';
 import { FeaturedComponent } from '../../components/featured/featured.component';
 import { ChartComponent } from '../../../shared/components/chart/chart.component';
 import { TableComponent } from '../../../shared/components/table/table.component';
+import { Store } from '@ngrx/store';
+import { OrderService } from '../../../shared/services/order.service';
 
 @Component({
   selector: 'app-home-page',
@@ -12,4 +14,8 @@ import { TableComponent } from '../../../shared/components/table/table.component
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
-export class HomePageComponent {}
+export class HomePageComponent  {
+  private orderService = inject(OrderService)
+  orders$ = this.orderService.getOrders();
+
+}

@@ -10,5 +10,5 @@
   </div>
   <div class="listContainer">
     <div class="listTitle">Latest Transactions</div>
-    <app-table />
+    <app-table [rows]="(orders$ | async) || []"/>
   </div>
