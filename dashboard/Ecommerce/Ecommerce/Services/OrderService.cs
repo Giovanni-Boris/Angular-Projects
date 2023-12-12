@@ -39,7 +39,7 @@ namespace Ecommerce.Services
 
             var order = new Order
             {
-                Date = orderRequest.Date,
+                Date = DateTime.UtcNow,
                 Amount = orderRequest.Amount,
                 Method = orderRequest.Method,
                 ProductId = productId,

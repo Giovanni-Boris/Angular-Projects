@@ -14,97 +14,7 @@ import { User } from '../../../shared/interfaces/user.model';
 import { UserService } from '../../../shared/services/user.service';
 import { Subject, takeUntil } from 'rxjs';
 
-export interface PeriodicElement {
-  id: number;
-  username: string;
-  img: string;
-  status: string;
-  email: string;
-  age: number;
-}
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {
-    id: 1,
-    username: 'Snow',
-    img: 'https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
-    status: 'active',
-    email: '1snow@gmail.com',
-    age: 35,
-  },
-  {
-    id: 2,
-    username: 'Jamie Lannister',
-    img: 'https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
-    email: '2snow@gmail.com',
-    status: 'passive',
-    age: 42,
-  },
-  {
-    id: 3,
-    username: 'Lannister',
-    img: 'https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
-    email: '3snow@gmail.com',
-    status: 'pending',
-    age: 45,
-  },
-  {
-    id: 4,
-    username: 'Stark',
-    img: 'https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
-    email: '4snow@gmail.com',
-    status: 'active',
-    age: 16,
-  },
-  {
-    id: 5,
-    username: 'Targaryen',
-    img: 'https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
-    email: '5snow@gmail.com',
-    status: 'passive',
-    age: 22,
-  },
-  {
-    id: 6,
-    username: 'Melisandre',
-    img: 'https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
-    email: '6snow@gmail.com',
-    status: 'active',
-    age: 15,
-  },
-  {
-    id: 7,
-    username: 'Clifford',
-    img: 'https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
-    email: '7snow@gmail.com',
-    status: 'passive',
-    age: 44,
-  },
-  {
-    id: 8,
-    username: 'Frances',
-    img: 'https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
-    email: '8snow@gmail.com',
-    status: 'active',
-    age: 36,
-  },
-  {
-    id: 9,
-    username: 'Roxie',
-    img: 'https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
-    email: 'snow@gmail.com',
-    status: 'pending',
-    age: 65,
-  },
-  {
-    id: 10,
-    username: 'Roxie',
-    img: 'https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
-    email: 'snow@gmail.com',
-    status: 'active',
-    age: 65,
-  },
-];
 @Component({
   selector: 'app-datatable',
   standalone: true,
@@ -148,14 +58,10 @@ export class DatatableComponent {
         .deleteUserData(user.id)
         .pipe(takeUntil(this.ngDestroy$))
         .subscribe((val) => {
-          if (val?.status == 204) {
             const index = this.dataSource.data.indexOf(user);
             this.dataSource.data.splice(index, 1);
             this.dataSource._updateChangeSubscription();
             this.dataSource.data;
-          } else {
-            window.alert(val?.value)
-          }
         });
   }
 

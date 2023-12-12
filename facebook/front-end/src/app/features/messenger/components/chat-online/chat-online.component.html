@@ -1,1 +1,13 @@
-<p>chat-online works!</p>
+<div class="chatOnline">
+  <div *ngFor="let el of onlineFriends; let index = index" class="chatOnlineFriend" (click)="handleClick(el)">
+    <div class="chatOnlineImgContainer">
+      <img
+        class="chatOnlineImg"
+        [src]="(el  && el.profilePicture) ? (el.profilePicture) : ('assets/person/noAvatar.png')"
+        alt=""
+      />
+      <div class="chatOnlineBadge"></div>
+    </div>
+    <span class="chatOnlineName">{{ el.name }}</span>
+  </div>
+</div>

@@ -23,6 +23,7 @@
           <textarea
             class="chatMessageInput"
             placeholder="write something..."
+            [(ngModel)]="newMessage"
           ></textarea>
           <button class="chatSubmitButton" (click)="handleSubmit()">
             Send
@@ -37,7 +38,9 @@
   <div class="chatOnline">
     <div class="chatOnlineWrapper">
       <app-chat-online
-        
+        [onlineUsers]="onlineUsers"
+        [currentId]="user?.userId"
+        (setcurrentChat)="currentChat = $event"
       />
     </div>
   </div>

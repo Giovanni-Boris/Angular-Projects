@@ -8,6 +8,7 @@ import { ConversationComponent } from './components/conversation/conversation.co
 import { MessageComponent } from './components/message/message.component';
 import { CustomDateFormatPipe } from 'src/app/shared/pipes/dateformat.pipe';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -23,7 +24,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     CoreModule,
     MessengerRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule
 
   ]
 })
