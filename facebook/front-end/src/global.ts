@@ -1,3 +1,3 @@
 export const Global = Object.freeze({
-  API_URL: 'http://localhost:8080/api/v1/',
+  API_URL: 'https://angular-facebook.onrender.com/api/v1/',
 })
