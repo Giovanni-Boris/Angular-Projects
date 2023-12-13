@@ -10,17 +10,36 @@ import { Global } from 'src/global';
 })
 export class MessengerService {
   constructor(private http: HttpClient) {}
-
+  postConversations(
+    senderId: number = -1,
+    receiverId: number = -1
+  ): Observable<Conversation> {
+    if (senderId === -1 || receiverId === -1)
+      return throwError(() => 'Cannot be negative');
+    return this.http
+      .post<Conversation>(Global.API_URL + `conversation/`, {
+        senderId,
+        receiverId,
+      })
+      .pipe(catchError(this.handleError));
+  }
   getConversations(userId: number = -1): Observable<Conversation[]> {
     if (userId === -1) return throwError(() => 'Cannot be negative');
     return this.http
       .get<Conversation[]>(Global.API_URL + `conversation/${userId}`, {})
       .pipe(catchError(this.handleError));
   }
-  getConversationsMembers(userId1: number = -1, userId2: number = -1): Observable<Conversation> {
-    if (userId1 === -1 || userId2 === -1) return throwError(() => 'Cannot be negative');
+  getConversationsMembers(
+    userId1: number = -1,
+    userId2: number = -1
+  ): Observable<Conversation> {
+    if (userId1 === -1 || userId2 === -1)
+      return throwError(() => 'Cannot be negative');
     return this.http
-      .get<Conversation>(Global.API_URL + `conversation/find/${userId1}/${userId2}`, {})
+      .get<Conversation>(
+        Global.API_URL + `conversation/find/${userId1}/${userId2}`,
+        {}
+      )
       .pipe(catchError(this.handleError));
   }
   getMessages(chatId: number): Observable<Message[]> {

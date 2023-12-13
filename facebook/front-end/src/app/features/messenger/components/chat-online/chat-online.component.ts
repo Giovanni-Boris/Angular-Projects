@@ -40,7 +40,7 @@ export class ChatOnlineComponent implements OnChanges, OnDestroy {
   get friends() {
     return this._friends;
   }
-  filter(){
+  filter() {
     this.onlineFriends = this._friends.filter((f) =>
       this.onlineUsers.includes(f._id)
     );
@@ -49,8 +49,25 @@ export class ChatOnlineComponent implements OnChanges, OnDestroy {
     this.messengerService
       .getConversationsMembers(el._id, this.currentId)
       .pipe(takeUntil(this.ngOnDestroy$))
-      .subscribe((conversation) => {
-        this.setcurrentChat.emit(conversation);
+      .subscribe({
+        next: (conversation) => {
+          this.setcurrentChat.emit(conversation);
+        },
+        error: (err) => {
+          let message = err?.error?.message;
+          if (message === "Conversation ot found") {
+            let response = window.confirm(
+              message + '\nDo you want to create a conversation?'
+            );
+            response &&
+              this.messengerService
+                .postConversations(el._id, this.currentId)
+                .pipe(takeUntil(this.ngOnDestroy$))
+                .subscribe((conversation) => {
+                  this.setcurrentChat.emit(conversation);
+                });
+          }
+        },
       });
   }
   ngOnChanges(changes: SimpleChanges): void {
@@ -64,10 +81,9 @@ export class ChatOnlineComponent implements OnChanges, OnDestroy {
           this.friends = friends;
         });
     }
-    if (changeUsers && changeUsers.previousValue !== changeUsers.currentValue){
+    if (changeUsers && changeUsers.previousValue !== changeUsers.currentValue) {
       this.filter();
     }
-
   }
   ngOnDestroy(): void {
     this.ngOnDestroy$.next();

@@ -10,8 +10,8 @@ FROM openjdk:17-slim
 
 WORKDIR /app
 
-COPY --from=build /app/target/backend-0.0.1-SNAPSHOT.jar /app/backend.jar
+COPY --from=build /app/target/socket-0.0.1-SNAPSHOT.jar /app/backend.jar
 
-EXPOSE 8080
+EXPOSE 5000
 
 ENTRYPOINT ["java", "-jar", "backend.jar"]
