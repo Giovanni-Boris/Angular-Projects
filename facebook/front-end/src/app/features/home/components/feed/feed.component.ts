@@ -26,8 +26,8 @@ export class FeedComponent implements OnInit, OnDestroy, OnChanges {
   ngDestroyed$ = new Subject<void>();
 
   set user(value: User | null) {
-    if (!value || this.name !== undefined) return;
     this._user = value;
+    if (!value || this.name !== undefined) return;
     this.timelinePosts(value.userId);
   }
   get user() {
