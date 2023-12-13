@@ -10,7 +10,7 @@ export class WebSocketService {
 
   constructor() {}
   connect(owner:number,destination: string, callback: (message: any) => void) {
-    const socket = new SockJS('http://localhost:5000/chat');
+    const socket = new SockJS('https://socket-chat-real-time.onrender.com/chat');
     this.stompClient = Stomp.over(socket);
     this.stompClient.connect({}, () => {
 
