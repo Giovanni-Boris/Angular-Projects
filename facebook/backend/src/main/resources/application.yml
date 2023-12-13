@@ -1,12 +1,12 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/facebook
-    username: postgres
-    password: 1234
+    url: jdbc:postgresql://bubble.db.elephantsql.com:5432/kgocbwrk
+    username: kgocbwrk
+    password: ZFfrExlDrxSeEIHIlCP-4EfZonV5nB93
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
